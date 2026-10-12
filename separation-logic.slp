@@ -3,3 +3,9 @@
 {pause}
 
 ## Hoare logic + pointers
+
+{pause}
+
+[Hoare logic](https://en.wikipedia.org/wiki/Hoare_logic) makes it possible to verify
+the correctness of imperative programs.
+

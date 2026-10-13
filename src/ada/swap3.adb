@@ -1,6 +1,6 @@
 pragma Assertion_Policy (Check);
 
-procedure Swap2 with SPARK_Mode => On is
+procedure Swap3 with SPARK_Mode => On is
    function Foo return Integer with Import;
    function Bar return Integer with Import;
 
@@ -13,11 +13,22 @@ begin
    declare
       Tmp : Integer;
    begin
+      pragma Assert (Y = Y0);
+      pragma Assert (X = X0);
+
       Tmp := X;
+
+      pragma Assert (Y = Y0);
+      pragma Assert (Tmp = X0);
+
       X := Y;
+
+      pragma Assert (X = Y0);
+      pragma Assert (Tmp = X0);
+
       Y := Tmp;
    end;
 
    pragma Assert (X = Y0);
    pragma Assert (Y = X0);
-end Swap2;
+end Swap3;

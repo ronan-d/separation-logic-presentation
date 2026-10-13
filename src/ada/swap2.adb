@@ -18,6 +18,5 @@ begin
       Y := Tmp;
    end;
 
-   pragma Assert (X = Y0);
-   pragma Assert (Y = X0);
+   pragma Assert (X = Y0 and Y = X0);
 end Swap2;

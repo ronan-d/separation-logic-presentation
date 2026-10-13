@@ -1,11 +1,52 @@
 # Separation logic
 
 {pause}
-
 ## Hoare logic + pointers
 
 {pause}
-
 [Hoare logic](https://en.wikipedia.org/wiki/Hoare_logic) makes it possible to verify
 the correctness of imperative programs.
 
+{pause up}
+### A Hoare logic example
+
+{carousel change-page=~n:all}
+> ```ada
+> …
+>    X : Integer := Foo (…);
+>    Y : Integer := Bar (…);
+> begin
+>    declare
+>       Tmp : Integer;
+>    begin
+>       Tmp := X;
+>       X := Y;
+>       Y := Tmp;
+>    end;
+> …
+> ```
+>
+> ```ada
+> …
+>    X : Integer := Foo (…);
+>    Y : Integer := Bar (…);
+>
+>    X0 : constant Integer := X with Ghost;
+>    Y0 : constant Integer := Y with Ghost;
+> begin
+>    declare
+>       Tmp : Integer;
+>    begin
+>       Tmp := X;
+>       X := Y;
+>       Y := Tmp;
+>    end;
+>
+>    pragma Assert (X = Y0);
+>    pragma Assert (Y = X0);
+> …
+> ```
+
+```ada
+
+```

@@ -15,7 +15,7 @@ begin
    begin
       pragma Assert (Y = Y0);
       pragma Assert (X = X0);
-
+   
       Tmp := X;
 
       pragma Assert (Y = Y0);

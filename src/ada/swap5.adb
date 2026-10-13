@@ -1,6 +1,6 @@
 pragma Assertion_Policy (Check);
 
-procedure Swap4 with SPARK_Mode => On is
+procedure Swap5 with SPARK_Mode => On is
    type Modular_Integer is mod 256;
 
    function Foo return Modular_Integer with Import;
@@ -12,23 +12,20 @@ procedure Swap4 with SPARK_Mode => On is
    X0 : constant Modular_Integer := X with Ghost;
    Y0 : constant Modular_Integer := Y with Ghost;
 begin
-   pragma Assert (Y = Y0);
-   pragma Assert (X = X0);
-   pragma Assert ((Y xor X xor Y) = X0);
+   pragma Assert (X = X0 and Y = Y0);
 
    X := X xor Y;
 
-   pragma Assert (Y = Y0);
-   pragma Assert ((X xor Y xor X) = Y0);
-   pragma Assert ((Y xor X) = X0);
+   pragma Assert (X = (X0 xor Y0) and Y = Y0);
 
    Y := Y xor X;
 
-   pragma Assert ((X xor Y) = Y0);
-   pragma Assert (Y = X0);
+   pragma Assert (X = (X0 xor Y0) and Y = (Y0 xor X0 xor Y0));
+   pragma Assert (X = (X0 xor Y0) and Y = X0);
 
    X := X xor Y;
 
-   pragma Assert (X = Y0);
-   pragma Assert (Y = X0);
-end Swap4;
+   pragma Assert (X = (X0 xor Y0 xor X0) and Y = X0);
+
+   pragma Assert (X = Y0 and Y = X0);
+end Swap5;

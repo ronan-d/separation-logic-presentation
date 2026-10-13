@@ -26,6 +26,7 @@ the correctness of imperative programs.
 > …
 > ```
 >
+> {style="font-size:30px"}
 > ```ada
 > …
 >    X : Integer := Foo (…);
@@ -46,7 +47,30 @@ the correctness of imperative programs.
 >    pragma Assert (Y = X0);
 > …
 > ```
-
-```ada
-
-```
+> 
+> {style="font-size:28px"}
+> ```ada
+>    X : Integer := Foo;
+>    Y : Integer := Bar;
+> 
+>    X0 : constant Integer := X with Ghost;
+>    Y0 : constant Integer := Y with Ghost;
+> begin
+>    declare
+>       Tmp : Integer;
+>    begin
+>       pragma Assert (Y = Y0 and X = X0);
+>    
+>       Tmp := X;
+> 
+>       pragma Assert (Y = Y0 and Tmp = X0);
+> 
+>       X := Y;
+> 
+>       pragma Assert (X = Y0 and Tmp = X0);
+> 
+>       Y := Tmp;
+>    end;
+> 
+>    pragma Assert (X = Y0 and Y = X0);
+> ```

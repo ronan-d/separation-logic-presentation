@@ -13,22 +13,18 @@ begin
    declare
       Tmp : Integer;
    begin
-      pragma Assert (Y = Y0);
-      pragma Assert (X = X0);
+      pragma Assert (Y = Y0 and X = X0);
    
       Tmp := X;
 
-      pragma Assert (Y = Y0);
-      pragma Assert (Tmp = X0);
+      pragma Assert (Y = Y0 and Tmp = X0);
 
       X := Y;
 
-      pragma Assert (X = Y0);
-      pragma Assert (Tmp = X0);
+      pragma Assert (X = Y0 and Tmp = X0);
 
       Y := Tmp;
    end;
 
-   pragma Assert (X = Y0);
-   pragma Assert (Y = X0);
+   pragma Assert (X = Y0 and Y = X0);
 end Swap3;

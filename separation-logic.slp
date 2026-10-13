@@ -74,3 +74,49 @@ the correctness of imperative programs.
 > 
 >    pragma Assert (X = Y0 and Y = X0);
 > ```
+
+{pause up}
+### Another hoare logic example
+
+{carousel change-page=~n:all}
+```ada
+…
+   X : Modular_Integer := Foo (…);
+   Y : Modular_Integer := Bar (…);
+
+   X0 : constant Modular_Integer := X with Ghost;
+   Y0 : constant Modular_Integer := Y with Ghost;
+begin
+   X := X xor Y;
+   Y := Y xor X;
+   X := X xor Y;
+
+   pragma Assert (X = Y0 and Y = X0);
+…
+```
+
+```ada
+…
+   X : Modular_Integer := Foo (…);
+   Y : Modular_Integer := Bar (…);
+
+   X0 : constant Modular_Integer := X with Ghost;
+   Y0 : constant Modular_Integer := Y with Ghost;
+begin
+   pragma Assert (X = X0 and Y = Y0);
+
+   X := X xor Y;
+
+   pragma Assert (X = (X0 xor Y0) and Y = Y0);
+
+   Y := Y xor X;
+
+   pragma Assert (X = (X0 xor Y0) and Y = (Y0 xor X0 xor Y0));
+   pragma Assert (X = (X0 xor Y0) and Y = X0);
+
+   X := X xor Y;
+
+   pragma Assert (X = (X0 xor Y0 xor X0) and Y = X0);
+   pragma Assert (X = Y0 and Y = X0);
+…
+```

@@ -26,6 +26,5 @@ begin
    X := X xor Y;
 
    pragma Assert (X = (X0 xor Y0 xor X0) and Y = X0);
-
    pragma Assert (X = Y0 and Y = X0);
 end Swap5;

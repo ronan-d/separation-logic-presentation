@@ -76,7 +76,7 @@ the correctness of imperative programs.
 > ```
 
 {pause up}
-### Another hoare logic example
+### Another Hoare logic example
 
 {carousel change-page=~n:all}
 > ```ada
@@ -121,3 +121,24 @@ the correctness of imperative programs.
 >    pragma Assert (X = Y0 and Y = X0);
 > …
 > ```
+
+{pause up}
+### An attempt to add pointers
+
+```ada
+…
+   -- Not valid SPARK!
+   X : constant access Modular_Integer := Foo (…);
+   Y : constant access Modular_Integer := Bar (…);
+
+   X0 : constant Modular_Integer := X.all with Ghost;
+   Y0 : constant Modular_Integer := Y.all with Ghost;
+begin
+   X.all := X.all xor Y.all;
+   Y.all := Y.all xor X.all;
+   X.all := X.all xor Y.all;
+
+   -- Wrong!
+   pragma Assert (X.all = Y0 and Y.all = X0);
+…
+```

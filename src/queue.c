@@ -14,10 +14,12 @@ void enqueue(struct queue *q, int n) {
   cell->next = NULL;
 
   if (q->first == NULL) {
-    q->last = cell;
+    q->first = cell;
+  } else {
+    q->last->next = cell;
   }
 
-  q->first = cell;
+  q->last = cell;
 }
 
 bool dequeue(struct queue *q, int *n) {

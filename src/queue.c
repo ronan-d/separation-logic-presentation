@@ -3,6 +3,8 @@
 #include <assert.h>
 #include <stdlib.h>
 
+struct queue new_queue(void) { return (struct queue){.first = NULL}; }
+
 void enqueue(struct queue *q, int n) {
   struct cell *cell = malloc(sizeof(*cell));
 

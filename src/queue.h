@@ -10,7 +10,7 @@ struct queue {
   struct cell *last;
 };
 
-struct queue *new_queue(void);
+struct queue new_queue(void);
 
 void enqueue(struct queue *q, int n);
 

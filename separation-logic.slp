@@ -95,6 +95,7 @@ the correctness of imperative programs.
 > …
 > ```
 > 
+> {style="font-size:28px"}
 > ```ada
 > …
 >    X : Modular_Integer := Foo (…);

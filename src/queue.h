@@ -7,8 +7,10 @@ struct cell {
 
 struct queue {
   struct cell *first;
-  struct cell *next;
+  struct cell *last;
 };
+
+struct queue *new_queue(void);
 
 void enqueue(struct queue *q, int n);
 

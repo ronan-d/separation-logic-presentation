@@ -142,3 +142,16 @@ begin
    pragma Assert (X.all = Y0 and Y.all = X0);
 …
 ```
+
+{pause up}
+## A timeline
+
+- Turing
+
+- Floyd
+
+- Hoare
+
+- Guy who found Turing paper
+
+- Separation logic papers

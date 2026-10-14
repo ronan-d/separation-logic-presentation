@@ -146,12 +146,9 @@ begin
 {pause up}
 ## A timeline
 
-- Turing
+{pause up}
+### 1969: Hoare paper
 
-- Floyd
+![](Hoare.png){style="display: block; margin: auto;"}
 
-- Hoare
-
-- Guy who found Turing paper
-
-- Separation logic papers
+{pause}

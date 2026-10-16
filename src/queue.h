@@ -1,17 +1,19 @@
 #include <stdbool.h>
 
-struct cell {
+struct cell
+{
   int element;
   struct cell *next;
 };
 
-struct queue {
+struct queue
+{
   struct cell *first;
   struct cell *last;
 };
 
-struct queue new_queue(void);
+struct queue new_queue (void);
 
-void enqueue(struct queue *q, int n);
+void enqueue (struct queue *q, int n);
 
-bool dequeue(struct queue *q, int *n);
+bool dequeue (struct queue *q, int *n);

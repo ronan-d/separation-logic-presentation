@@ -76,11 +76,9 @@ Definition ___compcert_va_composite : ident := $"__compcert_va_composite".
 Definition ___compcert_va_float64 : ident := $"__compcert_va_float64".
 Definition ___compcert_va_int32 : ident := $"__compcert_va_int32".
 Definition ___compcert_va_int64 : ident := $"__compcert_va_int64".
-Definition ___compound : ident := $"__compound".
 Definition ___func__ : ident := $"__func__".
 Definition ___stringlit_1 : ident := $"__stringlit_1".
 Definition ___stringlit_2 : ident := $"__stringlit_2".
-Definition __res : ident := $"_res".
 Definition _cell : ident := $"cell".
 Definition _cell__1 : ident := $"cell__1".
 Definition _dequeue : ident := $"dequeue".
@@ -88,12 +86,12 @@ Definition _element : ident := $"element".
 Definition _enqueue : ident := $"enqueue".
 Definition _first : ident := $"first".
 Definition _free : ident := $"free".
+Definition _init_queue : ident := $"init_queue".
 Definition _last : ident := $"last".
 Definition _main : ident := $"main".
 Definition _malloc : ident := $"malloc".
 Definition _n : ident := $"n".
 Definition _new_first : ident := $"new_first".
-Definition _new_queue : ident := $"new_queue".
 Definition _next : ident := $"next".
 Definition _q : ident := $"q".
 Definition _queue : ident := $"queue".
@@ -128,28 +126,23 @@ Definition v___stringlit_2 := {|
   gvar_volatile := false
 |}.
 
-Definition f_new_queue := {|
+Definition f_init_queue := {|
   fn_return := tvoid;
-  fn_callconv := {|cc_vararg:=None; cc_unproto:=false; cc_structret:=true|};
-  fn_params := ((__res, (tptr (Tstruct _queue noattr))) :: nil);
-  fn_vars := ((___compound, (Tstruct _queue noattr)) :: nil);
+  fn_callconv := cc_default;
+  fn_params := ((_first, (tptr (tptr (Tstruct _cell noattr)))) ::
+                (_last, (tptr (tptr (Tstruct _cell noattr)))) :: nil);
+  fn_vars := nil;
   fn_temps := nil;
   fn_body :=
 (Ssequence
-  (Ssequence
-    (Ssequence
-      (Sassign
-        (Efield (Evar ___compound (Tstruct _queue noattr)) _first
-          (tptr (Tstruct _cell noattr)))
-        (Ecast (Econst_int (Int.repr 0) tint) (tptr tvoid)))
-      (Sassign
-        (Efield (Evar ___compound (Tstruct _queue noattr)) _last
-          (tptr (Tstruct _cell noattr)))
-        (Ecast (Econst_int (Int.repr 0) tint) (tptr tvoid))))
-    (Sassign
-      (Ederef (Etempvar __res (tptr (Tstruct _queue noattr)))
-        (Tstruct _queue noattr)) (Evar ___compound (Tstruct _queue noattr))))
-  (Sreturn None))
+  (Sassign
+    (Ederef (Etempvar _first (tptr (tptr (Tstruct _cell noattr))))
+      (tptr (Tstruct _cell noattr)))
+    (Ecast (Econst_int (Int.repr 0) tint) (tptr tvoid)))
+  (Sassign
+    (Ederef (Etempvar _last (tptr (tptr (Tstruct _cell noattr))))
+      (tptr (Tstruct _cell noattr)))
+    (Ecast (Econst_int (Int.repr 0) tint) (tptr tvoid))))
 |}.
 
 Definition v___func__ := {|
@@ -189,7 +182,7 @@ Definition f_enqueue := {|
                                 (tptr tschar) :: nil) tvoid cc_default))
         ((Evar ___stringlit_2 (tarray tschar 13)) ::
          (Evar ___stringlit_1 (tarray tschar 11)) ::
-         (Econst_int (Int.repr 17) tint) ::
+         (Econst_int (Int.repr 18) tint) ::
          (Evar ___func__ (tarray tschar 8)) :: nil)))
     (Ssequence
       (Sassign
@@ -580,12 +573,12 @@ Definition global_definitions : list (ident * globdef fundef type) :=
      cc_default)) ::
  (_malloc, Gfun(External EF_malloc (tulong :: nil) (tptr tvoid) cc_default)) ::
  (_free, Gfun(External EF_free ((tptr tvoid) :: nil) tvoid cc_default)) ::
- (_new_queue, Gfun(Internal f_new_queue)) :: (___func__, Gvar v___func__) ::
- (_enqueue, Gfun(Internal f_enqueue)) ::
+ (_init_queue, Gfun(Internal f_init_queue)) ::
+ (___func__, Gvar v___func__) :: (_enqueue, Gfun(Internal f_enqueue)) ::
  (_dequeue, Gfun(Internal f_dequeue)) :: nil).
 
 Definition public_idents : list ident :=
-(_dequeue :: _enqueue :: _new_queue :: _free :: _malloc :: ___assert_fail ::
+(_dequeue :: _enqueue :: _init_queue :: _free :: _malloc :: ___assert_fail ::
  ___builtin_debug :: ___builtin_write32_reversed ::
  ___builtin_write16_reversed :: ___builtin_read32_reversed ::
  ___builtin_read16_reversed :: ___builtin_fnmsub :: ___builtin_fnmadd ::

@@ -3,10 +3,11 @@
 #include <assert.h>
 #include <stdlib.h>
 
-struct queue
-new_queue (void)
+void
+init_queue (struct cell **first, struct cell **last)
 {
-  return (struct queue){ .first = NULL };
+  *first = NULL;
+  *last = NULL;
 }
 
 void

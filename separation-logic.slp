@@ -173,3 +173,14 @@ Link: [https://people.eecs.berkeley.edu/~necula/Papers/FloydMeaning.pdf](https:/
 ### 2002: "Separation logic" appears
 
 ![](Reynolds.png){style="display: block; margin: auto; zoom: 0.6;"}
+
+{pause up}
+## Separation logic: the basics
+
+{pause}
+### Heap predicates
+
+{pause}
+In mathematical logic, we manipulate propositions.
+
+{pause}

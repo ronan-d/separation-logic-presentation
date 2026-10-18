@@ -15,7 +15,7 @@ Module Info.
   Definition abi := "standard".
   Definition bitsize := 64.
   Definition big_endian := false.
-  Definition source_file := "../queue.c".
+  Definition source_file := "queue.c".
   Definition normalized := true.
 End Info.
 
@@ -101,18 +101,6 @@ Definition _t'3 : ident := 130%positive.
 Definition _t'4 : ident := 131%positive.
 Definition _t'5 : ident := 132%positive.
 
-Definition v___stringlit_1 := {|
-  gvar_info := (tarray tschar 11);
-  gvar_init := (Init_int8 (Int.repr 46) :: Init_int8 (Int.repr 46) ::
-                Init_int8 (Int.repr 47) :: Init_int8 (Int.repr 113) ::
-                Init_int8 (Int.repr 117) :: Init_int8 (Int.repr 101) ::
-                Init_int8 (Int.repr 117) :: Init_int8 (Int.repr 101) ::
-                Init_int8 (Int.repr 46) :: Init_int8 (Int.repr 99) ::
-                Init_int8 (Int.repr 0) :: nil);
-  gvar_readonly := true;
-  gvar_volatile := false
-|}.
-
 Definition v___stringlit_2 := {|
   gvar_info := (tarray tschar 13);
   gvar_init := (Init_int8 (Int.repr 99) :: Init_int8 (Int.repr 101) ::
@@ -122,6 +110,16 @@ Definition v___stringlit_2 := {|
                 Init_int8 (Int.repr 78) :: Init_int8 (Int.repr 85) ::
                 Init_int8 (Int.repr 76) :: Init_int8 (Int.repr 76) ::
                 Init_int8 (Int.repr 0) :: nil);
+  gvar_readonly := true;
+  gvar_volatile := false
+|}.
+
+Definition v___stringlit_1 := {|
+  gvar_info := (tarray tschar 8);
+  gvar_init := (Init_int8 (Int.repr 113) :: Init_int8 (Int.repr 117) ::
+                Init_int8 (Int.repr 101) :: Init_int8 (Int.repr 117) ::
+                Init_int8 (Int.repr 101) :: Init_int8 (Int.repr 46) ::
+                Init_int8 (Int.repr 99) :: Init_int8 (Int.repr 0) :: nil);
   gvar_readonly := true;
   gvar_volatile := false
 |}.
@@ -181,7 +179,7 @@ Definition f_enqueue := {|
                                ((tptr tschar) :: (tptr tschar) :: tuint ::
                                 (tptr tschar) :: nil) tvoid cc_default))
         ((Evar ___stringlit_2 (tarray tschar 13)) ::
-         (Evar ___stringlit_1 (tarray tschar 11)) ::
+         (Evar ___stringlit_1 (tarray tschar 8)) ::
          (Econst_int (Int.repr 18) tint) ::
          (Evar ___func__ (tarray tschar 8)) :: nil)))
     (Ssequence
@@ -386,8 +384,8 @@ Definition global_definitions : list (ident * globdef fundef type) :=
    Gfun(External (EF_runtime "__compcert_i64_umulh"
                    (mksignature (AST.Xlong :: AST.Xlong :: nil) AST.Xlong
                      cc_default)) (tulong :: tulong :: nil) tulong
-     cc_default)) :: (___stringlit_1, Gvar v___stringlit_1) ::
- (___stringlit_2, Gvar v___stringlit_2) ::
+     cc_default)) :: (___stringlit_2, Gvar v___stringlit_2) ::
+ (___stringlit_1, Gvar v___stringlit_1) ::
  (___builtin_ais_annot,
    Gfun(External (EF_builtin "__builtin_ais_annot"
                    (mksignature (AST.Xptr :: nil) AST.Xvoid

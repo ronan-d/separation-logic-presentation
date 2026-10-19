@@ -3,12 +3,19 @@
 #include <assert.h>
 #include <stdlib.h>
 
-void
-init_queue (struct cell **first, struct cell **last)
+struct cell
 {
-  *first = NULL;
-  *last = NULL;
-}
+  int element;
+  struct cell *next;
+};
+
+struct queue
+{
+  struct cell *first;
+  struct cell *last;
+};
+
+struct queue *new_queue (void);
 
 void
 enqueue (struct queue *q, int n)

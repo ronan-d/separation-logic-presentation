@@ -14,4 +14,7 @@ end.
 
 Definition new_queue_spec : ident * funspec :=
   DECLARE _new_queue
-    POST [ t_queue ]
+  WITH first: val, last: val
+  PRE [tptr (tptr t_cell), tptr (tptr t_cell)]
+    PROP ()
+    PARAMS (first; last)

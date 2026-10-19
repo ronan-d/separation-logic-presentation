@@ -15,7 +15,7 @@ Module Info.
   Definition abi := "standard".
   Definition bitsize := 64.
   Definition big_endian := false.
-  Definition source_file := "queue.c".
+  Definition source_file := "../queue.c".
   Definition normalized := true.
 End Info.
 
@@ -77,8 +77,10 @@ Definition ___compcert_va_float64 : ident := $"__compcert_va_float64".
 Definition ___compcert_va_int32 : ident := $"__compcert_va_int32".
 Definition ___compcert_va_int64 : ident := $"__compcert_va_int64".
 Definition ___func__ : ident := $"__func__".
+Definition ___func____1 : ident := $"__func____1".
 Definition ___stringlit_1 : ident := $"__stringlit_1".
 Definition ___stringlit_2 : ident := $"__stringlit_2".
+Definition ___stringlit_3 : ident := $"__stringlit_3".
 Definition _cell : ident := $"cell".
 Definition _cell__1 : ident := $"cell__1".
 Definition _dequeue : ident := $"dequeue".
@@ -86,13 +88,14 @@ Definition _element : ident := $"element".
 Definition _enqueue : ident := $"enqueue".
 Definition _first : ident := $"first".
 Definition _free : ident := $"free".
-Definition _init_queue : ident := $"init_queue".
 Definition _last : ident := $"last".
 Definition _main : ident := $"main".
 Definition _malloc : ident := $"malloc".
 Definition _n : ident := $"n".
 Definition _new_first : ident := $"new_first".
+Definition _new_queue : ident := $"new_queue".
 Definition _next : ident := $"next".
+Definition _p : ident := $"p".
 Definition _q : ident := $"q".
 Definition _queue : ident := $"queue".
 Definition _t'1 : ident := 128%positive.
@@ -101,7 +104,19 @@ Definition _t'3 : ident := 130%positive.
 Definition _t'4 : ident := 131%positive.
 Definition _t'5 : ident := 132%positive.
 
-Definition v___stringlit_2 := {|
+Definition v___stringlit_1 := {|
+  gvar_info := (tarray tschar 11);
+  gvar_init := (Init_int8 (Int.repr 46) :: Init_int8 (Int.repr 46) ::
+                Init_int8 (Int.repr 47) :: Init_int8 (Int.repr 113) ::
+                Init_int8 (Int.repr 117) :: Init_int8 (Int.repr 101) ::
+                Init_int8 (Int.repr 117) :: Init_int8 (Int.repr 101) ::
+                Init_int8 (Int.repr 46) :: Init_int8 (Int.repr 99) ::
+                Init_int8 (Int.repr 0) :: nil);
+  gvar_readonly := true;
+  gvar_volatile := false
+|}.
+
+Definition v___stringlit_3 := {|
   gvar_info := (tarray tschar 13);
   gvar_init := (Init_int8 (Int.repr 99) :: Init_int8 (Int.repr 101) ::
                 Init_int8 (Int.repr 108) :: Init_int8 (Int.repr 108) ::
@@ -114,36 +129,70 @@ Definition v___stringlit_2 := {|
   gvar_volatile := false
 |}.
 
-Definition v___stringlit_1 := {|
-  gvar_info := (tarray tschar 8);
-  gvar_init := (Init_int8 (Int.repr 113) :: Init_int8 (Int.repr 117) ::
-                Init_int8 (Int.repr 101) :: Init_int8 (Int.repr 117) ::
-                Init_int8 (Int.repr 101) :: Init_int8 (Int.repr 46) ::
-                Init_int8 (Int.repr 99) :: Init_int8 (Int.repr 0) :: nil);
+Definition v___stringlit_2 := {|
+  gvar_info := (tarray tschar 10);
+  gvar_init := (Init_int8 (Int.repr 112) :: Init_int8 (Int.repr 32) ::
+                Init_int8 (Int.repr 33) :: Init_int8 (Int.repr 61) ::
+                Init_int8 (Int.repr 32) :: Init_int8 (Int.repr 78) ::
+                Init_int8 (Int.repr 85) :: Init_int8 (Int.repr 76) ::
+                Init_int8 (Int.repr 76) :: Init_int8 (Int.repr 0) :: nil);
   gvar_readonly := true;
   gvar_volatile := false
 |}.
 
-Definition f_init_queue := {|
-  fn_return := tvoid;
-  fn_callconv := cc_default;
-  fn_params := ((_first, (tptr (tptr (Tstruct _cell noattr)))) ::
-                (_last, (tptr (tptr (Tstruct _cell noattr)))) :: nil);
-  fn_vars := nil;
-  fn_temps := nil;
-  fn_body :=
-(Ssequence
-  (Sassign
-    (Ederef (Etempvar _first (tptr (tptr (Tstruct _cell noattr))))
-      (tptr (Tstruct _cell noattr)))
-    (Ecast (Econst_int (Int.repr 0) tint) (tptr tvoid)))
-  (Sassign
-    (Ederef (Etempvar _last (tptr (tptr (Tstruct _cell noattr))))
-      (tptr (Tstruct _cell noattr)))
-    (Ecast (Econst_int (Int.repr 0) tint) (tptr tvoid))))
+Definition v___func__ := {|
+  gvar_info := (tarray tschar 10);
+  gvar_init := (Init_int8 (Int.repr 110) :: Init_int8 (Int.repr 101) ::
+                Init_int8 (Int.repr 119) :: Init_int8 (Int.repr 95) ::
+                Init_int8 (Int.repr 113) :: Init_int8 (Int.repr 117) ::
+                Init_int8 (Int.repr 101) :: Init_int8 (Int.repr 117) ::
+                Init_int8 (Int.repr 101) :: Init_int8 (Int.repr 0) :: nil);
+  gvar_readonly := true;
+  gvar_volatile := false
 |}.
 
-Definition v___func__ := {|
+Definition f_new_queue := {|
+  fn_return := (tptr (Tstruct _queue noattr));
+  fn_callconv := cc_default;
+  fn_params := nil;
+  fn_vars := nil;
+  fn_temps := ((_p, (tptr (Tstruct _queue noattr))) ::
+               (_t'1, (tptr tvoid)) :: nil);
+  fn_body :=
+(Ssequence
+  (Ssequence
+    (Scall (Some _t'1)
+      (Evar _malloc (Tfunction (tulong :: nil) (tptr tvoid) cc_default))
+      ((Esizeof (Tstruct _queue noattr) tulong) :: nil))
+    (Sset _p (Etempvar _t'1 (tptr tvoid))))
+  (Ssequence
+    (Sifthenelse (Ebinop One (Etempvar _p (tptr (Tstruct _queue noattr)))
+                   (Ecast (Econst_int (Int.repr 0) tint) (tptr tvoid)) tint)
+      Sskip
+      (Scall None
+        (Evar ___assert_fail (Tfunction
+                               ((tptr tschar) :: (tptr tschar) :: tuint ::
+                                (tptr tschar) :: nil) tvoid cc_default))
+        ((Evar ___stringlit_2 (tarray tschar 10)) ::
+         (Evar ___stringlit_1 (tarray tschar 11)) ::
+         (Econst_int (Int.repr 23) tint) ::
+         (Evar ___func__ (tarray tschar 10)) :: nil)))
+    (Ssequence
+      (Sassign
+        (Efield
+          (Ederef (Etempvar _p (tptr (Tstruct _queue noattr)))
+            (Tstruct _queue noattr)) _first (tptr (Tstruct _cell noattr)))
+        (Ecast (Econst_int (Int.repr 0) tint) (tptr tvoid)))
+      (Ssequence
+        (Sassign
+          (Efield
+            (Ederef (Etempvar _p (tptr (Tstruct _queue noattr)))
+              (Tstruct _queue noattr)) _last (tptr (Tstruct _cell noattr)))
+          (Ecast (Econst_int (Int.repr 0) tint) (tptr tvoid)))
+        (Sreturn (Some (Etempvar _p (tptr (Tstruct _queue noattr)))))))))
+|}.
+
+Definition v___func____1 := {|
   gvar_info := (tarray tschar 8);
   gvar_init := (Init_int8 (Int.repr 101) :: Init_int8 (Int.repr 110) ::
                 Init_int8 (Int.repr 113) :: Init_int8 (Int.repr 117) ::
@@ -178,10 +227,10 @@ Definition f_enqueue := {|
         (Evar ___assert_fail (Tfunction
                                ((tptr tschar) :: (tptr tschar) :: tuint ::
                                 (tptr tschar) :: nil) tvoid cc_default))
-        ((Evar ___stringlit_2 (tarray tschar 13)) ::
-         (Evar ___stringlit_1 (tarray tschar 8)) ::
-         (Econst_int (Int.repr 18) tint) ::
-         (Evar ___func__ (tarray tschar 8)) :: nil)))
+        ((Evar ___stringlit_3 (tarray tschar 13)) ::
+         (Evar ___stringlit_1 (tarray tschar 11)) ::
+         (Econst_int (Int.repr 36) tint) ::
+         (Evar ___func____1 (tarray tschar 8)) :: nil)))
     (Ssequence
       (Sassign
         (Efield
@@ -384,8 +433,9 @@ Definition global_definitions : list (ident * globdef fundef type) :=
    Gfun(External (EF_runtime "__compcert_i64_umulh"
                    (mksignature (AST.Xlong :: AST.Xlong :: nil) AST.Xlong
                      cc_default)) (tulong :: tulong :: nil) tulong
-     cc_default)) :: (___stringlit_2, Gvar v___stringlit_2) ::
- (___stringlit_1, Gvar v___stringlit_1) ::
+     cc_default)) :: (___stringlit_1, Gvar v___stringlit_1) ::
+ (___stringlit_3, Gvar v___stringlit_3) ::
+ (___stringlit_2, Gvar v___stringlit_2) ::
  (___builtin_ais_annot,
    Gfun(External (EF_builtin "__builtin_ais_annot"
                    (mksignature (AST.Xptr :: nil) AST.Xvoid
@@ -571,12 +621,13 @@ Definition global_definitions : list (ident * globdef fundef type) :=
      cc_default)) ::
  (_malloc, Gfun(External EF_malloc (tulong :: nil) (tptr tvoid) cc_default)) ::
  (_free, Gfun(External EF_free ((tptr tvoid) :: nil) tvoid cc_default)) ::
- (_init_queue, Gfun(Internal f_init_queue)) ::
- (___func__, Gvar v___func__) :: (_enqueue, Gfun(Internal f_enqueue)) ::
+ (___func__, Gvar v___func__) :: (_new_queue, Gfun(Internal f_new_queue)) ::
+ (___func____1, Gvar v___func____1) ::
+ (_enqueue, Gfun(Internal f_enqueue)) ::
  (_dequeue, Gfun(Internal f_dequeue)) :: nil).
 
 Definition public_idents : list ident :=
-(_dequeue :: _enqueue :: _init_queue :: _free :: _malloc :: ___assert_fail ::
+(_dequeue :: _enqueue :: _new_queue :: _free :: _malloc :: ___assert_fail ::
  ___builtin_debug :: ___builtin_write32_reversed ::
  ___builtin_write16_reversed :: ___builtin_read32_reversed ::
  ___builtin_read16_reversed :: ___builtin_fnmsub :: ___builtin_fnmadd ::

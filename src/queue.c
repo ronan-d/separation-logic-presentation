@@ -15,7 +15,18 @@ struct queue
   struct cell *last;
 };
 
-struct queue *new_queue (void);
+struct queue *
+new_queue (void)
+{
+  struct queue *p = malloc (sizeof (*p));
+
+  assert (p != NULL);
+
+  p->first = NULL;
+  p->last = NULL;
+
+  return p;
+}
 
 void
 enqueue (struct queue *q, int n)

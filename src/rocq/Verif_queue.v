@@ -7,8 +7,8 @@ Definition t_cell := Tstruct _cell noattr.
 
 Definition t_queue := Tstruct _queue noattr.
 
-Fixpoint cellrep (l: list val) (first: val) (last: val) : mpred := match l with
-| x :: _ :: l' => EX y:val, data_at Tsh t_cell (x, y) first * cellrep l' y last
+Fixpoint queuerep (l: list val) (first: val) (last: val) : mpred := match l with
+| x :: _ :: l' => EX y:val, data_at Tsh t_cell (x, y) first * queuerep l' y last
 | x :: [] => !! (first = last) && emp
 | [] => !! (first = nullval) && emp
 end.
@@ -16,6 +16,7 @@ end.
 Definition new_queue_spec : ident * funspec :=
   DECLARE _new_queue
   WITH gv: globals
-  PRE [tptr (tptr t_cell), tptr (tptr t_cell)]
-    PROP ()
-    PARAMS (first; last)
+  PRE [ ]
+    PROP () PARAMS() GLOBALS(gv) SEP (mem_mgr gv)
+  POST [ tptr t_queue ]
+    EX p: val, PROP ( ) RETURN (p) SEP (queuerep nil )

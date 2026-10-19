@@ -178,9 +178,16 @@ Link: [https://people.eecs.berkeley.edu/~necula/Papers/FloydMeaning.pdf](https:/
 ## Separation logic: the basics
 
 {pause}
-### Heap predicates
+### Assertions
 
 {pause}
-In mathematical logic, we manipulate propositions.
+- In mathematical logic, we manipulate *propositions*.
 
 {pause}
+- In separation logic, we manipulate **assertions**.
+
+{pause}
+- An assertion says something about an implicit **heap fragment**.
+
+{pause up}
+### "Points-to" assertions

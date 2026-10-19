@@ -191,3 +191,18 @@ Link: [https://people.eecs.berkeley.edu/~necula/Papers/FloydMeaning.pdf](https:/
 
 {pause up}
 ### "Points-to" assertions
+
+{.block style="text-align: center;"}
+x ↦ v
+
+{pause}
+"x points to v"
+
+{pause}
+"The variable *x* holds the address of a memory location that contains the value *v*"
+
+{pause}
+### Footprints
+
+{.definition pause}
+The **footprint** of an assertion is the set the locations that are mentioned in the assertion.

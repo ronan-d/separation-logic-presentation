@@ -13,7 +13,9 @@ Fixpoint queuerep (l: list Z) (first: val) (last: val) : mpred := match l with
     malloc_token Ews t_cell first *
     data_at Ews t_cell (Vint (Int.repr n), y) first *
     queuerep l' y last
-| x :: [] => !! (first = last) && emp
+| n :: [] => !! (first = last) && sepcon
+    (malloc_token Ews t_cell first)
+    (data_at Ews t_cell (Vint (Int.repr n), nullval) first)
 | [] => !! (first = nullval) && emp
 end.
 

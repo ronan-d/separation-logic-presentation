@@ -50,21 +50,15 @@ enqueue (struct queue *q, int n)
   q->last = cell;
 }
 
-bool
-dequeue (struct queue *q, int *n)
+int
+dequeue (struct queue *q)
 {
-  if (q->first == NULL)
-    {
-      return false;
-    }
-
-  *n = q->first->element;
-
+  int res = q->first->element;
   struct cell *new_first = q->first->next;
 
   free (q->first);
 
   q->first = new_first;
 
-  return true;
+  return res;
 }

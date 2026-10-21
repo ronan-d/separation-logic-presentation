@@ -98,11 +98,10 @@ Definition _next : ident := $"next".
 Definition _p : ident := $"p".
 Definition _q : ident := $"q".
 Definition _queue : ident := $"queue".
+Definition _res : ident := $"res".
 Definition _t'1 : ident := 128%positive.
 Definition _t'2 : ident := 129%positive.
 Definition _t'3 : ident := 130%positive.
-Definition _t'4 : ident := 131%positive.
-Definition _t'5 : ident := 132%positive.
 
 Definition v___stringlit_1 := {|
   gvar_info := (tarray tschar 11);
@@ -279,68 +278,51 @@ Definition f_enqueue := {|
 |}.
 
 Definition f_dequeue := {|
-  fn_return := tbool;
+  fn_return := tint;
   fn_callconv := cc_default;
-  fn_params := ((_q, (tptr (Tstruct _queue noattr))) :: (_n, (tptr tint)) ::
-                nil);
+  fn_params := ((_q, (tptr (Tstruct _queue noattr))) :: nil);
   fn_vars := nil;
-  fn_temps := ((_new_first, (tptr (Tstruct _cell noattr))) ::
-               (_t'5, (tptr (Tstruct _cell noattr))) :: (_t'4, tint) ::
+  fn_temps := ((_res, tint) :: (_new_first, (tptr (Tstruct _cell noattr))) ::
                (_t'3, (tptr (Tstruct _cell noattr))) ::
                (_t'2, (tptr (Tstruct _cell noattr))) ::
                (_t'1, (tptr (Tstruct _cell noattr))) :: nil);
   fn_body :=
 (Ssequence
   (Ssequence
-    (Sset _t'5
+    (Sset _t'3
       (Efield
         (Ederef (Etempvar _q (tptr (Tstruct _queue noattr)))
           (Tstruct _queue noattr)) _first (tptr (Tstruct _cell noattr))))
-    (Sifthenelse (Ebinop Oeq (Etempvar _t'5 (tptr (Tstruct _cell noattr)))
-                   (Ecast (Econst_int (Int.repr 0) tint) (tptr tvoid)) tint)
-      (Sreturn (Some (Econst_int (Int.repr 0) tint)))
-      Sskip))
+    (Sset _res
+      (Efield
+        (Ederef (Etempvar _t'3 (tptr (Tstruct _cell noattr)))
+          (Tstruct _cell noattr)) _element tint)))
   (Ssequence
     (Ssequence
-      (Sset _t'3
+      (Sset _t'2
         (Efield
           (Ederef (Etempvar _q (tptr (Tstruct _queue noattr)))
             (Tstruct _queue noattr)) _first (tptr (Tstruct _cell noattr))))
-      (Ssequence
-        (Sset _t'4
-          (Efield
-            (Ederef (Etempvar _t'3 (tptr (Tstruct _cell noattr)))
-              (Tstruct _cell noattr)) _element tint))
-        (Sassign (Ederef (Etempvar _n (tptr tint)) tint)
-          (Etempvar _t'4 tint))))
+      (Sset _new_first
+        (Efield
+          (Ederef (Etempvar _t'2 (tptr (Tstruct _cell noattr)))
+            (Tstruct _cell noattr)) _next (tptr (Tstruct _cell noattr)))))
     (Ssequence
       (Ssequence
-        (Sset _t'2
+        (Sset _t'1
           (Efield
             (Ederef (Etempvar _q (tptr (Tstruct _queue noattr)))
               (Tstruct _queue noattr)) _first (tptr (Tstruct _cell noattr))))
-        (Sset _new_first
-          (Efield
-            (Ederef (Etempvar _t'2 (tptr (Tstruct _cell noattr)))
-              (Tstruct _cell noattr)) _next (tptr (Tstruct _cell noattr)))))
+        (Scall None
+          (Evar _free (Tfunction ((tptr tvoid) :: nil) tvoid cc_default))
+          ((Etempvar _t'1 (tptr (Tstruct _cell noattr))) :: nil)))
       (Ssequence
-        (Ssequence
-          (Sset _t'1
-            (Efield
-              (Ederef (Etempvar _q (tptr (Tstruct _queue noattr)))
-                (Tstruct _queue noattr)) _first
-              (tptr (Tstruct _cell noattr))))
-          (Scall None
-            (Evar _free (Tfunction ((tptr tvoid) :: nil) tvoid cc_default))
-            ((Etempvar _t'1 (tptr (Tstruct _cell noattr))) :: nil)))
-        (Ssequence
-          (Sassign
-            (Efield
-              (Ederef (Etempvar _q (tptr (Tstruct _queue noattr)))
-                (Tstruct _queue noattr)) _first
-              (tptr (Tstruct _cell noattr)))
-            (Etempvar _new_first (tptr (Tstruct _cell noattr))))
-          (Sreturn (Some (Econst_int (Int.repr 1) tint))))))))
+        (Sassign
+          (Efield
+            (Ederef (Etempvar _q (tptr (Tstruct _queue noattr)))
+              (Tstruct _queue noattr)) _first (tptr (Tstruct _cell noattr)))
+          (Etempvar _new_first (tptr (Tstruct _cell noattr))))
+        (Sreturn (Some (Etempvar _res tint)))))))
 |}.
 
 Definition composites : list composite_definition :=

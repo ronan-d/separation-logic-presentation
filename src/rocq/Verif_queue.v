@@ -119,3 +119,12 @@ Definition dequeue_spec : ident * funspec :=
     SEP (queue (i :: l) p; mem_mgr gv)
   POST [ tint ]
     PROP ( ) RETURN (Vint (Int.repr i)) SEP (queue l p; mem_mgr gv).
+
+ Definition Gprog : funspecs :=
+        ltac:(with_library prog [
+                   new_queue_spec; enqueue_spec; dequeue_spec
+ ]).
+
+Lemma body_dequeue: semax_body Vprog Gprog f_dequeue dequeue_spec.
+Proof.
+  start_function.

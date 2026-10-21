@@ -24,6 +24,24 @@ Arguments queuerep l first last : simpl never.
 Lemma queuerep_local_prop: forall l first last, queuerep l first last |--
   !! (is_pointer_or_null first /\ (first=nullval <-> l=nil)).
 Proof.
+  intros.
+  revert first last.
+  induction l as [| x l' IH ]; intros.
+  {
+    unfold queuerep.
+    entailer!.
+    split; auto.
+  }
+  unfold queuerep. fold queuerep.
+  destruct l' as [| x' l''].
+  {
+    entailer!.
+    split; intros.
+    - subst last.
+      eapply field_compatible_nullval.
+      exact H0.
+    - inversion H2.
+  }
 Qed.
 
 Definition queue (l : list Z) (p: val) :=

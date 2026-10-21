@@ -48,7 +48,7 @@ Proof.
   - subst first.
     eapply field_compatible_nullval.
     exact H0.
-  - inversion H2.
+  - inversion H3.
 Qed.
 
 #[export] Hint Resolve queuerep_local_prop : saturate_local.

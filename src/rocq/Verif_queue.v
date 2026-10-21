@@ -19,7 +19,14 @@ Fixpoint queuerep (l: list Z) (first: val) (last: val) : mpred := match l with
 | [] => !! (first = nullval) && emp
 end.
 
-Definition queue (l : list val)
+Arguments queuerep l first last : simpl never.
+
+Definition queue (l : list Z) (p: val) :=
+  EX first last: val,
+    malloc_token Ews t_queue p *
+    data_at Ews t_queue (first, last) p *
+    queuerep l first last.
+
 
 Definition new_queue_spec : ident * funspec :=
   DECLARE _new_queue

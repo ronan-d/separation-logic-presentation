@@ -74,7 +74,7 @@ Definition queue (l : list Z) (p: val) :=
     data_at Ews t_queue (first, last) p *
     queuerep l first last.
 
-Lemma queue_local_prop : forall l p, queue l p |-- !! (isptr p ).
+Lemma queue_local_prop : forall l p, queue l p |-- !! (isptr p).
 Proof.
   intros.
   unfold queue.
@@ -136,4 +136,26 @@ Proof.
     forward.
     deadvars!.
     forward_call (t_cell, first, gv).
-    + entailer.
+    + destruct (eq_dec first nullval).
+      * entailer!.
+      * entailer!.
+    + forward.
+      unfold queue.
+      Exists nullval.
+      Exists last.
+      entailer!.
+      unfold queuerep.
+      entailer!.
+  - unfold queuerep. fold queuerep.
+    forward.
+    forward.
+    forward.
+    forward_call (t_cell, first, gv).
+    {
+      destruct (eq_dec first nullval); entailer!. 
+    }
+    forward.
+    unfold queue.
+    Exists y.
+    Exists last.
+    entailer!.

@@ -74,6 +74,23 @@ Definition queue (l : list Z) (p: val) :=
     data_at Ews t_queue (first, last) p *
     queuerep l first last.
 
+Lemma queue_local_prop : forall l p, queue l p |-- !! (isptr p).
+Proof.
+  intros.
+  unfold queue.
+  entailer.
+  entailer!.
+Qed.
+
+#[export] Hint Resolve queue_local_prop : saturate_local.
+
+Lemma queue_valid_pointer: forall l p,
+  queue l p |-- valid_pointer p.
+Proof.
+  intros.
+  unfold queue.
+  entailer.
+Qed.
 
 Definition new_queue_spec : ident * funspec :=
   DECLARE _new_queue

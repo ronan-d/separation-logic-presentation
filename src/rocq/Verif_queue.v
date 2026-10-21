@@ -102,4 +102,10 @@ Definition new_queue_spec : ident * funspec :=
 
 Definition enqueue_spec : ident * funspec :=
   DECLARE _enqueue
-  WITH p: val, i: Z, l: list Z
+  WITH p: val, i: Z, l: list Z, gv: globals
+  PRE [ tptr t_queue, tint ]
+    PROP (Int.min_signed <= i <= Int.max_signed)
+    PARAMS (p; Vint (Int.repr i)) GLOBALS(gv)
+    SEP (queue l p; mem_mgr gv)
+  POST [ tvoid ]
+    PROP ( ) RETURN () SEP (queue (l ++ [i]) p; mem_mgr gv).

@@ -42,7 +42,31 @@ Proof.
       exact H0.
     - inversion H2.
   }
+  entailer.
+  entailer!.
+  split; intros.
+  - subst first.
+    eapply field_compatible_nullval.
+    exact H0.
+  - inversion H2.
 Qed.
+
+#[export] Hint Resolve queuerep_local_prop : saturate_local.
+
+Lemma queuerep_first_valid_pointer: forall l first last,
+  queuerep l first last |-- valid_pointer first.
+Proof.
+  intros.
+  unfold queuerep.
+  destruct l; cbn.
+  - entailer!.
+  - destruct l; cbn.
+    + entailer!.
+    + Intros y.
+      auto with valid_pointer.
+Qed.
+
+#[export] Hint Resolve queuerep_first_valid_pointer : valid_pointer.
 
 Definition queue (l : list Z) (p: val) :=
   EX first last: val,

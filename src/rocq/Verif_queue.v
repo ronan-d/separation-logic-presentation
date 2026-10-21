@@ -21,6 +21,11 @@ end.
 
 Arguments queuerep l first last : simpl never.
 
+Lemma queuerep_local_prop: forall l first last, queuerep l first last |--
+  !! (is_pointer_or_null first /\ (first=nullval <-> l=nil)).
+Proof.
+Qed.
+
 Definition queue (l : list Z) (p: val) :=
   EX first last: val,
     malloc_token Ews t_queue p *

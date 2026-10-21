@@ -98,4 +98,8 @@ Definition new_queue_spec : ident * funspec :=
   PRE [ ]
     PROP () PARAMS() GLOBALS(gv) SEP (mem_mgr gv)
   POST [ tptr t_queue ]
-    EX p: val, PROP ( ) RETURN (p) SEP (queuerep nil )
+    EX p: val, PROP ( ) RETURN (p) SEP (queue nil p; mem_mgr gv).
+
+Definition enqueue_spec : ident * funspec :=
+  DECLARE _enqueue
+  WITH p: val, i: Z, l: list Z

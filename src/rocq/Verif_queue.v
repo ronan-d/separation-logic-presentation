@@ -109,3 +109,13 @@ Definition enqueue_spec : ident * funspec :=
     SEP (queue l p; mem_mgr gv)
   POST [ tvoid ]
     PROP ( ) RETURN () SEP (queue (l ++ [i]) p; mem_mgr gv).
+
+Definition dequeue_spec : ident * funspec :=
+  DECLARE _dequeue
+  WITH p: val, i: Z, l: list Z, gv: globals
+  PRE [ tptr t_queue ]
+    PROP ()
+    PARAMS (p) GLOBALS(gv)
+    SEP (queue (i :: l) p; mem_mgr gv)
+  POST [ tint ]
+    PROP ( ) RETURN (Vint (Int.repr i)) SEP (queue l p; mem_mgr gv).

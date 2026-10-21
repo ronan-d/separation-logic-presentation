@@ -53,12 +53,12 @@ enqueue (struct queue *q, int n)
 int
 dequeue (struct queue *q)
 {
-  int res = q->first->element;
-  struct cell *new_first = q->first->next;
+  struct cell *c = q->first;
 
-  free (q->first);
+  int res = c->element;
+  q->first = c->next;
 
-  q->first = new_first;
+  free (c);
 
   return res;
 }

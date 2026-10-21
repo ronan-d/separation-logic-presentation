@@ -81,6 +81,7 @@ Definition ___func____1 : ident := $"__func____1".
 Definition ___stringlit_1 : ident := $"__stringlit_1".
 Definition ___stringlit_2 : ident := $"__stringlit_2".
 Definition ___stringlit_3 : ident := $"__stringlit_3".
+Definition _c : ident := $"c".
 Definition _cell : ident := $"cell".
 Definition _cell__1 : ident := $"cell__1".
 Definition _dequeue : ident := $"dequeue".
@@ -92,7 +93,6 @@ Definition _last : ident := $"last".
 Definition _main : ident := $"main".
 Definition _malloc : ident := $"malloc".
 Definition _n : ident := $"n".
-Definition _new_first : ident := $"new_first".
 Definition _new_queue : ident := $"new_queue".
 Definition _next : ident := $"next".
 Definition _p : ident := $"p".
@@ -282,46 +282,34 @@ Definition f_dequeue := {|
   fn_callconv := cc_default;
   fn_params := ((_q, (tptr (Tstruct _queue noattr))) :: nil);
   fn_vars := nil;
-  fn_temps := ((_res, tint) :: (_new_first, (tptr (Tstruct _cell noattr))) ::
-               (_t'3, (tptr (Tstruct _cell noattr))) ::
-               (_t'2, (tptr (Tstruct _cell noattr))) ::
+  fn_temps := ((_c, (tptr (Tstruct _cell noattr))) :: (_res, tint) ::
                (_t'1, (tptr (Tstruct _cell noattr))) :: nil);
   fn_body :=
 (Ssequence
+  (Sset _c
+    (Efield
+      (Ederef (Etempvar _q (tptr (Tstruct _queue noattr)))
+        (Tstruct _queue noattr)) _first (tptr (Tstruct _cell noattr))))
   (Ssequence
-    (Sset _t'3
-      (Efield
-        (Ederef (Etempvar _q (tptr (Tstruct _queue noattr)))
-          (Tstruct _queue noattr)) _first (tptr (Tstruct _cell noattr))))
     (Sset _res
       (Efield
-        (Ederef (Etempvar _t'3 (tptr (Tstruct _cell noattr)))
-          (Tstruct _cell noattr)) _element tint)))
-  (Ssequence
-    (Ssequence
-      (Sset _t'2
-        (Efield
-          (Ederef (Etempvar _q (tptr (Tstruct _queue noattr)))
-            (Tstruct _queue noattr)) _first (tptr (Tstruct _cell noattr))))
-      (Sset _new_first
-        (Efield
-          (Ederef (Etempvar _t'2 (tptr (Tstruct _cell noattr)))
-            (Tstruct _cell noattr)) _next (tptr (Tstruct _cell noattr)))))
+        (Ederef (Etempvar _c (tptr (Tstruct _cell noattr)))
+          (Tstruct _cell noattr)) _element tint))
     (Ssequence
       (Ssequence
         (Sset _t'1
           (Efield
-            (Ederef (Etempvar _q (tptr (Tstruct _queue noattr)))
-              (Tstruct _queue noattr)) _first (tptr (Tstruct _cell noattr))))
-        (Scall None
-          (Evar _free (Tfunction ((tptr tvoid) :: nil) tvoid cc_default))
-          ((Etempvar _t'1 (tptr (Tstruct _cell noattr))) :: nil)))
-      (Ssequence
+            (Ederef (Etempvar _c (tptr (Tstruct _cell noattr)))
+              (Tstruct _cell noattr)) _next (tptr (Tstruct _cell noattr))))
         (Sassign
           (Efield
             (Ederef (Etempvar _q (tptr (Tstruct _queue noattr)))
               (Tstruct _queue noattr)) _first (tptr (Tstruct _cell noattr)))
-          (Etempvar _new_first (tptr (Tstruct _cell noattr))))
+          (Etempvar _t'1 (tptr (Tstruct _cell noattr)))))
+      (Ssequence
+        (Scall None
+          (Evar _free (Tfunction ((tptr tvoid) :: nil) tvoid cc_default))
+          ((Etempvar _c (tptr (Tstruct _cell noattr))) :: nil))
         (Sreturn (Some (Etempvar _res tint)))))))
 |}.
 

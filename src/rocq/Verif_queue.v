@@ -128,3 +128,10 @@ Definition dequeue_spec : ident * funspec :=
 Lemma body_dequeue: semax_body Vprog Gprog f_dequeue dequeue_spec.
 Proof.
   start_function.
+  forward.
+  assert_PROP (offset_val 0 first = field_address t_queue (DOT _first) p).
+  {
+    entailer.
+    entailer!.
+  }
+  forward.

@@ -74,7 +74,7 @@ Definition queue (l : list Z) (p: val) :=
     data_at Ews t_queue (first, last) p *
     queuerep l first last.
 
-Lemma queue_local_prop : forall l p, queue l p |-- !! (isptr p).
+Lemma queue_local_prop : forall l p, queue l p |-- !! (isptr p ).
 Proof.
   intros.
   unfold queue.
@@ -129,9 +129,11 @@ Lemma body_dequeue: semax_body Vprog Gprog f_dequeue dequeue_spec.
 Proof.
   start_function.
   forward.
-  assert_PROP (offset_val 0 first = field_address t_queue (DOT _first) p).
-  {
-    entailer.
-    entailer!.
-  }
-  forward.
+  destruct l.
+  - unfold queuerep.
+    forward.
+    forward.
+    forward.
+    deadvars!.
+    forward_call (t_cell, first, gv).
+    + entailer.

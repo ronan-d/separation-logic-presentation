@@ -43,15 +43,29 @@ Proof.
       + subst last.
         inversion H0.
         inversion H2.
-      + 
+      + inversion H2.
+    - intros.
+      split.
+      + intros.
+        exists x.
+        reflexivity.
+      + intros.
+        reflexivity.
   }
   entailer.
   entailer!.
   split; intros.
-  - subst first.
-    eapply field_compatible_nullval.
-    exact H0.
-  - inversion H3.
+  - split.
+    + intros.
+      eapply field_compatible_nullval.
+      subst first.
+      exact H0.
+    + intros.
+      inversion H4.
+  - split.
+    + intros.
+      
+
 Qed.
 
 #[export] Hint Resolve queuerep_local_prop : saturate_local.

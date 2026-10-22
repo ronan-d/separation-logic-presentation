@@ -148,14 +148,26 @@ Proof.
       entailer!.
   - unfold queuerep. fold queuerep.
     forward.
-    forward.
-    forward.
-    forward_call (t_cell, first, gv).
+    induction l as [|i' l' IH].
     {
-      destruct (eq_dec first nullval); entailer!. 
+      forward.
+      {
+        Locate tc_val.
+        entailer.
+        entailer!.
+      }
+      forward.
+      forward_call (t_cell, first, gv).
+      {
+        destruct (eq_dec first nullval); entailer!.
+      }
+      forward.
+      entailer.
+      unfold queue.
+      Exists first.
+      Exists last.
+      entailer.
+      unfold queuerep.
+      entailer.
+      
     }
-    forward.
-    unfold queue.
-    Exists y.
-    Exists last.
-    entailer!.

@@ -24,7 +24,7 @@ Arguments queuerep l first last : simpl never.
 Lemma queuerep_local_prop: forall l first last, queuerep l first last |--
   !! (is_pointer_or_null first /\
       (first = nullval <-> l = nil) /\
-      first <> nullval -> (first = last <-> exists i, l = [i]) ).
+      (first <> nullval -> (first = last <-> exists i, l = [i]))).
 Proof.
   intros.
   revert first last.
@@ -32,22 +32,7 @@ Proof.
   {
     unfold queuerep.
     entailer!.
-    split.
-    {
-      split.
-      {
-        intros.
-        reflexivity.
-      }
-      {
-        intros.
-        reflexivity.
-      }
-    }
-    split.
-    {
-      
-    }
+    split; auto.
   }
   unfold queuerep. fold queuerep.
   destruct l' as [| x' l''].

@@ -225,3 +225,11 @@ The **footprint** of an assertion is the set the locations that are mentioned in
 
 {pause}
 Pronounced "A and separately B".
+
+{pause}
+Approximately:
+
+{.block style="text-align: center;" pause}
+*A ∧ B ∧* the **memory footprints of A and B are disjoint**
+
+{pause up}

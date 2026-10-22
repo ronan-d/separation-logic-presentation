@@ -38,11 +38,12 @@ Proof.
   destruct l' as [| x' l''].
   {
     entailer!.
-    split; intros.
-    - subst last.
-      eapply field_compatible_nullval.
-      exact H0.
-    - inversion H2.
+    split.
+    - split; intros.
+      + subst last.
+        inversion H0.
+        inversion H2.
+      + 
   }
   entailer.
   entailer!.

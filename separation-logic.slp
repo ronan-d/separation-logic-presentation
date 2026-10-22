@@ -172,6 +172,7 @@ Link: [https://people.eecs.berkeley.edu/~necula/Papers/FloydMeaning.pdf](https:/
 {pause up}
 ### 2002: "Separation logic" appears
 
+{pause}
 ![](Reynolds.png){style="display: block; margin: auto; zoom: 0.6;"}
 
 {pause up}
@@ -206,3 +207,9 @@ x ↦ v
 
 {.definition pause}
 The **footprint** of an assertion is the set the locations that are mentioned in the assertion.
+
+{pause up}
+### Separating conjunction
+
+{pause}
+- In mathematical logic, given two propositions *A* and *B*

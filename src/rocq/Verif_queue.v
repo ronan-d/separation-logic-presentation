@@ -56,7 +56,12 @@ Proof.
         inversion H.
       + intros.
         inversion H2.
-    - 
+    - intros.
+      split.
+      + intros.
+        exists x.
+        reflexivity.
+      + 
   }
 Qed.
 

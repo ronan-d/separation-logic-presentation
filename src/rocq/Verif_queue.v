@@ -37,16 +37,16 @@ Lemma queuerep_local_prop: forall l first last, queuerep l first last |--
       (first = nullval <-> l = nil) /\
       (first <> nullval -> (first = last <-> exists i, l = [i]))).
 Proof.
-  destruct l as [|x l'].
+  induction l as [| x l' IH ].
   {
     intros.
     unfold queuerep.
     entailer!.
     split; reflexivity.
   }
-  induction l' as [|x' l'' IH].
+  intros.
+  destruct l' as [| x' l'' ].
   {
-    intros.
     unfold queuerep.
     entailer!.
     split.
@@ -56,31 +56,8 @@ Proof.
         inversion H.
       + intros.
         inversion H2.
-    - intros.
-      split.
-      + intros.
-        exists x.
-        reflexivity.
-      + intros.
-        reflexivity.
+    - 
   }
-  intros.
-  rewrite queuerep_cons_cons.
-  Intros p.
-  specialize (IH p last).
-  entailer.
-  entailer!.
-  split.
-  - split.
-    + intros.
-      subst first.
-      inversion H.
-    + intros.
-      inversion H2.
-  - intros.
-    split.
-    + intros.
-      subst last.
 Qed.
 
 #[export] Hint Resolve queuerep_local_prop : saturate_local.

@@ -19,6 +19,17 @@ Fixpoint queuerep (l: list Z) (first: val) (last: val) : mpred := match l with
     queuerep l' y last
 end.
 
+Lemma queuerep_cons_cons : forall x y l first last,
+  queuerep (x :: y :: l) first last =
+    EX p:val,
+      malloc_token Ews t_cell first *
+      data_at Ews t_cell (Vint (Int.repr x), p) first *
+      queuerep (y :: l) p last.
+Proof.
+  intros.
+  reflexivity.
+Qed.
+
 Arguments queuerep l first last : simpl never.
 
 Lemma queuerep_local_prop: forall l first last, queuerep l first last |--
@@ -54,10 +65,10 @@ Proof.
         reflexivity.
   }
   intros.
-  unfold queuerep.
-  Intros y.
-  specialize (IH y last).
-  unfold queuerep in IH.
+  rewrite queuerep_cons_cons.
+  Intros p.
+  specialize (IH p last).
+  entailer.
   entailer!.
   split.
   - split.
@@ -70,7 +81,6 @@ Proof.
     split.
     + intros.
       subst last.
-      specialize (IH first first).
 Qed.
 
 #[export] Hint Resolve queuerep_local_prop : saturate_local.

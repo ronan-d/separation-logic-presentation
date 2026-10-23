@@ -142,44 +142,37 @@ Lemma body_dequeue: semax_body Vprog Gprog f_dequeue dequeue_spec.
 Proof.
   start_function.
   forward.
-  destruct l.
-  - unfold queuerep.
+  destruct l as [| j l' ].
+  {
+    unfold queuerep.
     forward.
     forward.
     forward.
-    deadvars!.
     forward_call (t_cell, first, gv).
-    + destruct (eq_dec first nullval).
-      * entailer!.
-      * entailer!.
-    + forward.
-      unfold queue.
-      Exists nullval.
-      Exists last.
-      entailer!.
-      unfold queuerep.
-      entailer!.
-  - unfold queuerep. fold queuerep.
-    forward.
-    induction l as [|i' l' IH].
     {
-      forward.
-      {
-        entailer.
-        entailer!.
-      }
-      forward.
-      forward_call (t_cell, first, gv).
-      {
-        destruct (eq_dec first nullval); entailer!.
-      }
-      forward.
-      entailer.
-      unfold queue.
-      Exists first.
-      Exists last.
-      entailer.
-      unfold queuerep.
-      entailer.
-
+      destruct (eq_dec first nullval); entailer!.
     }
+    forward.
+    unfold queue.
+    entailer.
+    Exists nullval.
+    Exists last.
+    entailer!.
+    unfold queuerep.
+    entailer!.
+  }
+  rewrite queuerep_cons_cons.
+  Intros p0.
+  forward.
+  forward.
+  forward.
+  forward_call (t_cell, first, gv).
+  {
+    destruct (eq_dec first nullval); entailer!.
+  }
+  forward.
+  unfold queue.
+  Exists p0.
+  Exists last.
+  entailer!.
+Qed.

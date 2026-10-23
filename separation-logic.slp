@@ -214,8 +214,10 @@ The **footprint** of an assertion is the set the locations that are mentioned in
 {pause}
 - In mathematical logic, given two propositions *A* and *B*, we can form their conjunction:
 
-{.block style="text-align: center;" pause}
-*A ∧ B*
+{pause}
+```math
+A \land B
+```
 
 {pause}
 - In separation logic, given two assertions *A* and *B*, we can form their **separating conjunction**:

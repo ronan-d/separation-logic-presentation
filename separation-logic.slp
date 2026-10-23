@@ -222,8 +222,10 @@ A \land B
 {pause}
 - In separation logic, given two assertions *A* and *B*, we can form their **separating conjunction**:
 
-{.block style="text-align: center;" pause}
-**A * B**
+{pause}
+```math
+A * B
+```
 
 {pause}
 Pronounced "A and separately B".
@@ -231,7 +233,9 @@ Pronounced "A and separately B".
 {pause}
 Approximately:
 
-{.block style="text-align: center;" pause}
-*A ∧ B ∧* the **memory footprints of A and B are disjoint**
+{pause}
+```math
+A \land B \land \text{"the memory footprints of A and B are disjoint"}
+```
 
 {pause up}

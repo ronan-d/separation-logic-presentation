@@ -1,5 +1,5 @@
 digraph Heap {
     node [shape=box];
 
-    hello [label="\"hello\""]
+    hello [label="\"hello\"",xlabel="lol"]
 }

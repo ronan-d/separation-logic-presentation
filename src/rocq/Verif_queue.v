@@ -182,6 +182,53 @@ Proof.
   start_function.
   forward_call (t_cell, gv).
   Intros vret.
-  destruct (eq_dec)
-  
+  destruct (eq_dec vret nullval).
+  {
+    subst vret.
+    forward_if (False).
+    - forward_call (1).
+      entailer.
+    - forward.
+      entailer.
+  }
+  forward_if (True).
+  {
+    forward_call (1).
+    entailer.
+  }
+  {
+    forward.
+    entailer.
+  }
+  Intros.
+  forward.
+  forward.
+  forward.
+  forward_if (
+    PROP ()
+    LOCAL ()
+    SEP (EX last',
+      queuerep (l ++ [i]) vret last' *
+      mem_mgr gv * malloc_token Ews t_queue p *
+      data_at Ews t_queue (vret, last) p)
+  ).
+  {
+    subst first.
+    forward.
+    entailer.
+    destruct H6 as [H6 _].
+    specialize (H6 (eq_refl _)).
+    subst l.
+    Exists vret.
+    cbn.
+    unfold queuerep.
+    entailer!.
+  }
+  {
+    forward.
+    {
+      unfold queue.
+      entailer!.
+    }
+  }
 Qed.

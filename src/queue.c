@@ -1,6 +1,5 @@
 #include "queue.h"
 
-#include <assert.h>
 #include <stdlib.h>
 
 struct cell
@@ -20,7 +19,8 @@ new_queue (void)
 {
   struct queue *p = malloc (sizeof (*p));
 
-  assert (p != NULL);
+  if (!p)
+    exit (1);
 
   p->first = NULL;
   p->last = NULL;
@@ -33,7 +33,8 @@ enqueue (struct queue *q, int n)
 {
   struct cell *cell = malloc (sizeof (*cell));
 
-  assert (cell != NULL);
+  if (!cell)
+    exit (1);
 
   cell->element = n;
   cell->next = NULL;

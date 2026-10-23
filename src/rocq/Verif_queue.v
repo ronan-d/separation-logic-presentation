@@ -34,35 +34,34 @@ Arguments queuerep l first last : simpl never.
 
 Lemma queuerep_local_prop: forall l first last, queuerep l first last |--
   !! (is_pointer_or_null first /\
-      (first = nullval <-> l = nil) /\
-      (first <> nullval -> (first = last <-> exists i, l = [i]))).
+      (first = nullval <-> l = nil)).
 Proof.
-  induction l as [| x l' IH ].
+  destruct l as [| x l' ]; intros.
   {
-    intros.
     unfold queuerep.
     entailer!.
     split; reflexivity.
   }
-  intros.
   destruct l' as [| x' l'' ].
   {
     unfold queuerep.
     entailer!.
     split.
-    - split.
-      + intros.
-        subst last.
-        inversion H.
-      + intros.
-        inversion H2.
     - intros.
-      split.
-      + intros.
-        exists x.
-        reflexivity.
-      + 
+      subst last.
+      inversion H.
+    - intros.
+      inversion H2.
   }
+  rewrite queuerep_cons_cons.
+  entailer.
+  entailer!.
+  split.
+  - intros.
+    subst first.
+    inversion H.
+  - intros.
+    inversion H2.
 Qed.
 
 #[export] Hint Resolve queuerep_local_prop : saturate_local.
@@ -166,7 +165,6 @@ Proof.
     {
       forward.
       {
-        Locate tc_val.
         entailer.
         entailer!.
       }

@@ -176,3 +176,23 @@ Proof.
   Exists last.
   entailer!.
 Qed.
+
+Lemma body_enqueue: semax_body Vprog Gprog f_enqueue enqueue_spec.
+Proof.
+  start_function.
+  forward_call (t_cell, gv).
+  Intros vret.
+  forward_if (True).
+  {
+    destruct (eq_dec vret nullval).
+    - entailer!.
+    - entailer!.
+  }
+  {
+    forward.
+    destruct (eq_dec vret nullval); entailer!.
+  }
+  {
+    forward.
+  }
+Qed.

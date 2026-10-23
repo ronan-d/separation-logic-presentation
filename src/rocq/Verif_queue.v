@@ -182,17 +182,6 @@ Proof.
   start_function.
   forward_call (t_cell, gv).
   Intros vret.
-  forward_if (True).
-  {
-    destruct (eq_dec vret nullval).
-    - entailer!.
-    - entailer!.
-  }
-  {
-    forward.
-    destruct (eq_dec vret nullval); entailer!.
-  }
-  {
-    forward.
-  }
+  destruct (eq_dec)
+  
 Qed.

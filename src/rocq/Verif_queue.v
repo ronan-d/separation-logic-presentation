@@ -37,7 +37,7 @@ Lemma queuerep_local_prop: forall l first last, queuerep l first last |--
       (first = nullval <-> l = nil) /\
       (first <> nullval -> is_pointer_or_null last)).
 Proof.
-  destruct l as [| x l' ]; intros.
+  induction l as [| x l' IH]; intros.
   {
     unfold queuerep.
     entailer!.
@@ -57,12 +57,20 @@ Proof.
   rewrite queuerep_cons_cons.
   entailer.
   entailer!.
-  split.
+  split. split.
   - intros.
     subst first.
     inversion H.
   - intros.
-    inversion H2.
+    inversion H4.
+  - intros.
+    destruct (eq_dec p nullval).
+    + subst p.
+      destruct H2 as [H2 _].
+      specialize (H2 (eq_refl _)).
+      inversion H2.
+    + specialize (H3 n).
+      exact H3.
 Qed.
 
 #[export] Hint Resolve queuerep_local_prop : saturate_local.

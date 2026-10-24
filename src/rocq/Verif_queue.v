@@ -186,6 +186,8 @@ Proof.
   entailer!.
 Qed.
 
+Check semax_pre_post. 
+
 Lemma body_enqueue: semax_body Vprog Gprog f_enqueue enqueue_spec.
 Proof.
   start_function.
@@ -216,10 +218,10 @@ Proof.
   forward_if (
     PROP ()
     LOCAL ()
-    SEP (EX last',
-      queuerep (l ++ [i]) vret last' *
+    SEP (EX first' last',
+      queuerep (l ++ [i]) first' last' *
       mem_mgr gv * malloc_token Ews t_queue p *
-      data_at Ews t_queue (vret, last) p)
+      data_at Ews t_queue (first', last) p)
   ).
   {
     subst first.
@@ -228,15 +230,41 @@ Proof.
     destruct H6 as [H6 _].
     specialize (H6 (eq_refl _)).
     subst l.
-    Exists vret.
+    Exists vret vret.
     cbn.
     unfold queuerep.
     entailer!.
   }
   {
     forward.
+    induction l as [| x l' IH ].
     {
+      unfold queuerep.
+      autorewrite with norm.
+      assert_PROP (False).
+      {
+        entailer.
+      }
+      contradiction.
+    }    
+    destruct l' as [| x' l'' ].
+    {
+      unfold queuerep.
+      autorewrite with norm.
+      assert_PROP (first = last).
+      {
+        entailer.
+      }
+      subst last.
+      forward.
       entailer.
+      Exists first vret.
+      cbn.
+      unfold queuerep.
+      Exists vret.
+      entailer!.
     }
+    rewrite queuerep_cons_cons.
+    Intros p0.
   }
 Qed.

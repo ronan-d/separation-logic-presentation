@@ -34,7 +34,8 @@ Arguments queuerep l first last : simpl never.
 
 Lemma queuerep_local_prop: forall l first last, queuerep l first last |--
   !! (is_pointer_or_null first /\
-      (first = nullval <-> l = nil)).
+      (first = nullval <-> l = nil) /\
+      (first <> nullval -> is_pointer_or_null last)).
 Proof.
   destruct l as [| x l' ]; intros.
   {
@@ -227,8 +228,7 @@ Proof.
   {
     forward.
     {
-      unfold queue.
-      entailer!.
+      entailer.
     }
   }
 Qed.

@@ -247,23 +247,17 @@ Proof.
   }
   {
     forward.
-    destruct l as [| x l' ].
+    induction l as [| x l' IH ].
     {
-      unfold queuerep.
-      assert_PROP (first = nullval).
+      assert_PROP (False).
       {
+        unfold queuerep.
         entailer.
       }
-      subst first.
-      exfalso.
-      apply H0.
-      reflexivity.
+      contradiction.
     }
-    clear H0.
-    revert first.
-    induction l' as [| x' l'' ].
+    destruct l' as [| x' l'' ].
     {
-      intros first.
       unfold queuerep.
       assert_PROP (first = last).
       {
@@ -271,20 +265,12 @@ Proof.
       }
       subst last.
       forward.
+      Exists first vret.
       entailer.
       cbn.
       unfold queuerep.
-      Exists first vret vret.
+      Exists vret.
       entailer!.
-    }
-    intros first.
-    rewrite queuerep_cons_cons.
-    Intros p0.
-    specialize (IHl'' p0).
-    eapply semax_pre_post.
-    6: exact IHl''.
-    {
-      entailer.
     }
   }
 Qed.

@@ -186,7 +186,17 @@ Proof.
   entailer!.
 Qed.
 
-Check semax_pre_post. 
+Check semax.
+Check statement.
+Print statement.
+Check expr.
+Print expr.
+
+(* Lemma enqueue_lemma : forall Delta first last new_cell,
+  semax Delta
+    (todo)
+    (todo)
+    (todo) *)
 
 Lemma body_enqueue: semax_body Vprog Gprog f_enqueue enqueue_spec.
 Proof.
@@ -237,20 +247,24 @@ Proof.
   }
   {
     forward.
-    induction l as [| x l' IH ].
+    destruct l as [| x l' ].
     {
       unfold queuerep.
-      autorewrite with norm.
-      assert_PROP (False).
+      assert_PROP (first = nullval).
       {
         entailer.
       }
-      contradiction.
-    }    
-    destruct l' as [| x' l'' ].
+      subst first.
+      exfalso.
+      apply H0.
+      reflexivity.
+    }
+    clear H0.
+    revert first.
+    induction l' as [| x' l'' ].
     {
+      intros first.
       unfold queuerep.
-      autorewrite with norm.
       assert_PROP (first = last).
       {
         entailer.
@@ -258,13 +272,19 @@ Proof.
       subst last.
       forward.
       entailer.
-      Exists first vret.
       cbn.
       unfold queuerep.
-      Exists vret.
+      Exists first vret vret.
       entailer!.
     }
+    intros first.
     rewrite queuerep_cons_cons.
     Intros p0.
+    specialize (IHl'' p0).
+    eapply semax_pre_post.
+    6: exact IHl''.
+    {
+      entailer.
+    }
   }
 Qed.

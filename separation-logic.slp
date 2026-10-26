@@ -202,6 +202,17 @@ x ↦ v
 {pause}
 "The variable *x* holds the address of a memory location that contains the value *v*"
 
+<style>
+  .slipshow-svg-container { display: block; }
+  .slipshow-svg-container svg {
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
+    width: auto;
+    zoom: 1.4;
+  }
+</style>
+
 {pause}
 ![Diagram 1](heap1.dot.svg)
 

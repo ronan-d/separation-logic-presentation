@@ -270,7 +270,37 @@ A \land B \land \text{"the memory footprints of $A$ and $B$ are disjoint"}
 {pause up}
 ## Motivating example
 
-{speaker-note}
-This is all 
+{pause}
+![Too many lists](Too-many-lists.png){style="display: block; margin: auto;"}
 
-hehe
+{pause}
+### First part: singly linked list
+
+Everything works very nicely: `Box`, `Option` and ownership rules make it possible
+to write a very nice stack.
+
+{pause}
+But what if we wanted to use our linked list as…
+
+{pause}
+### …a queue?
+
+{pause center}
+> First attempt with `Rc` and `Refcell` but it gets very unergonomic.
+> 
+> {pause}
+> Eventually resort to `unsafe`.
+
+{pause}
+The goal: **implement this queue with full deductive verification**.
+
+{pause up}
+## Verified Software Toolchain
+
+![Verified Software Toolchain logo](VST.gif){style="display: block; margin: auto; zoom: 0.6;"}
+
+{pause}
+The programming language is C.
+
+{pause}
+Verifications are Rocq developments using a specialized library.

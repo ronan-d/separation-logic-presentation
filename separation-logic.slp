@@ -203,6 +203,9 @@ x ↦ v
 "The variable *x* holds the address of a memory location that contains the value *v*"
 
 {pause}
+![Diagram 1](heap1.dot.svg)
+
+{pause}
 ### Footprints
 
 {.definition pause}

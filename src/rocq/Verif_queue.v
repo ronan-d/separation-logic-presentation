@@ -247,8 +247,10 @@ Proof.
   }
   {
     forward.
+    generalize dependent first.
     induction l as [| x l' IH ].
     {
+      intros.
       assert_PROP (False).
       {
         unfold queuerep.
@@ -258,6 +260,7 @@ Proof.
     }
     destruct l' as [| x' l'' ].
     {
+      intros.
       unfold queuerep.
       assert_PROP (first = last).
       {
@@ -272,5 +275,11 @@ Proof.
       Exists vret.
       entailer!.
     }
+    eapply semax_pre_post.
+    6: exact IH.
+    - rewrite queuerep_cons_cons.
+      entailer!.
+      Intros p0.
+      entailer!.
   }
 Qed.

@@ -279,6 +279,8 @@ Proof.
     rewrite queuerep_cons_cons.
     Intros p0.
     specialize (IH p0).
+    autorewrite with norm.
+    autorewrite with norm in IH.
     assert_PROP (p0 <> nullval).
     {
       entailer!.

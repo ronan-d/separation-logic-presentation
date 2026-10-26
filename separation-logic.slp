@@ -193,8 +193,9 @@ Link: [https://people.eecs.berkeley.edu/~necula/Papers/FloydMeaning.pdf](https:/
 {pause up}
 ### "Points-to" assertions
 
-{.block style="text-align: center;"}
-x ↦ v
+```math
+x \mapsto v
+```
 
 {pause}
 "x points to v"
@@ -252,4 +253,7 @@ Approximately:
 A \land B \land \text{"the memory footprints of A and B are disjoint"}
 ```
 
-{pause up}
+{pause}
+
+
+![Diagram 2](heap2.dot.svg)

@@ -1,0 +1,15 @@
+digraph Heap {
+    rankdir = BT;
+
+    node [shape=box];
+
+    hello [label="\"hello\""];
+    p [shape=diamond,label="p"];
+
+    p -> hello;
+
+    goodbye [label="\"goodbye\""];
+    q [shape=diamond,label="q"];
+
+    q -> goodbye;
+}

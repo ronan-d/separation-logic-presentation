@@ -227,7 +227,7 @@ The **footprint** of an assertion is the set the locations that are mentioned in
 ### Separating conjunction
 
 {pause}
-- In mathematical logic, given two propositions *A* and *B*, we can form their conjunction:
+- In mathematical logic, given two propositions $A$ and $B$, we can form their conjunction:
 
 {pause}
 ```math
@@ -235,7 +235,7 @@ A \land B
 ```
 
 {pause}
-- In separation logic, given two assertions *A* and *B*, we can form their **separating conjunction**:
+- In separation logic, given two assertions $A$ and $B$, we can form their **separating conjunction**:
 
 {pause}
 ```math
@@ -243,17 +243,24 @@ A * B
 ```
 
 {pause}
-Pronounced "A and separately B".
+Pronounced "$A$ and separately $B$".
 
 {pause}
 Approximately:
 
 {pause}
 ```math
-A \land B \land \text{"the memory footprints of A and B are disjoint"}
+A \land B \land \text{"the memory footprints of $A$ and $B$ are disjoint"}
 ```
 
-{pause}
+{pause scroll}
+#### Example:
 
+$p \mapsto \text{"hello"} * q \mapsto \text{"goodbye"}$:
 
 ![Diagram 2](heap2.dot.svg)
+
+{pause scroll}
+#### Another example (always false):
+
+$p \mapsto \text{"hello"} * p \mapsto \text{"hello"}$:

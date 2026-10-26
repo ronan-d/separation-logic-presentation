@@ -287,5 +287,8 @@ Proof.
       inversion H10.
     }
     specialize (IH H1).
+    eapply semax_pre_post.
+    6: exact IH.
+    - entailer!.
   }
 Qed.

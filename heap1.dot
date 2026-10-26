@@ -3,8 +3,8 @@ digraph Heap {
 
     node [shape=box];
 
-    hello [label="\"hello\""];
-    p [shape=diamond,label="p"];
+    v [label=v];
+    x [shape=diamond,label=x];
 
-    p -> hello;
+    x -> v;
 }

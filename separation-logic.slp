@@ -198,10 +198,10 @@ x \mapsto v
 ```
 
 {pause}
-"x points to v"
+"$x$ points to $v$"
 
 {pause}
-"The variable *x* holds the address of a memory location that contains the value *v*"
+"The variable $x$ holds the address of a memory location that contains the value $v$"
 
 <style>
   .slipshow-svg-container { display: block; }

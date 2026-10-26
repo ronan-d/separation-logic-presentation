@@ -247,6 +247,9 @@ Proof.
   }
   {
     forward.
+    autorewrite with norm.
+    deadvars!.
+    freeze FR1 := (data_at Ews t_queue _ p).
     generalize dependent first.
     induction l as [| x l' IH ].
     {

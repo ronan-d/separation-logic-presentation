@@ -275,11 +275,17 @@ Proof.
       Exists vret.
       entailer!.
     }
-    eapply semax_pre_post.
-    6: exact IH.
-    - rewrite queuerep_cons_cons.
+    intros.
+    rewrite queuerep_cons_cons.
+    Intros p0.
+    specialize (IH p0).
+    assert_PROP (p0 <> nullval).
+    {
       entailer!.
-      Intros p0.
-      entailer!.
+      destruct H10 as [H10 _].
+      specialize (H10 (eq_refl _)).
+      inversion H10.
+    }
+    specialize (IH H1).
   }
 Qed.

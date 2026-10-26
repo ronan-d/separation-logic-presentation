@@ -4,12 +4,9 @@ digraph Heap {
     node [shape=box];
 
     hello [label="\"hello\""];
-    p [shape=diamond,label="p"];
+    p1 [shape=diamond,label="p"];
+    p2 [shape=diamond,label="p"];
 
-    p -> hello;
-
-    goodbye [label="\"goodbye\""];
-    q [shape=diamond,label="q"];
-
-    q -> goodbye;
+    p1 -> hello;
+    p2 -> hello;
 }

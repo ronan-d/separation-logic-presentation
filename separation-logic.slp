@@ -254,13 +254,15 @@ A \land B \land \text{"the memory footprints of $A$ and $B$ are disjoint"}
 ```
 
 {pause scroll}
-#### Example:
-
-$p \mapsto \text{"hello"} * q \mapsto \text{"goodbye"}$:
-
-![Diagram 2](heap2.dot.svg)
+> #### Example:
+> 
+> $p \mapsto \text{"hello"} * q \mapsto \text{"goodbye"}$:
+> 
+> ![Diagram 2](heap2.dot.svg)
 
 {pause scroll}
-#### Another example (always false):
-
-$p \mapsto \text{"hello"} * p \mapsto \text{"hello"}$:
+> #### Another example (always false):
+> 
+> $p \mapsto \text{"hello"} * p \mapsto \text{"hello"}$:
+> 
+> ![Diagram 3](heap3.dot.svg)

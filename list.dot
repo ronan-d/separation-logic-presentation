@@ -1,14 +1,14 @@
 digraph List {
     rankdir = BT;
 
-    p [shape = diamond,label = p]
+    p [shape = diamond, label = p, group = "first"]
 
     node [shape=box];
 
     subgraph cells {
         rank=same;
 
-        c1 [label = "\"Alabama\""]
+        c1 [label = "\"Alabama\"", group = "first"]
         c2 [label = "…"]
         c3 [label = "\"Wyoming\""]
 
@@ -16,5 +16,6 @@ digraph List {
         c2 -> c3;
     }
 
-    p -> c1;
+    p -> c1 [weigth = 2];
+    p -> c3;
 }

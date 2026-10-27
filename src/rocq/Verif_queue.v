@@ -225,9 +225,6 @@ Proof.
   forward.
   forward.
   forward.
-  Compute (reptype t_queue).
-  Check ((first, last) : reptype t_queue).
-  remember ((first, last) : reptype t_queue) as val0.
   forward_if (
     PROP ()
     LOCAL ()
@@ -252,18 +249,34 @@ Proof.
     forward.
     autorewrite with norm.
     deadvars!.
-    apply semax_post with (R' := normal_ret_assert
-      (PROP ()
-      LOCAL ()
-      SEP (
-        mem_mgr gv;
-        queuerep (l ++ [i]) first vret;
-        malloc_token Ews t_queue p))).
-    Check semax_post.
-    frame_SEP 1.
-    freeze FR1 := (data_at Ews t_queue _ p).
+    apply semax_pre_post' with
+      (P' :=
+        PROP ()
+        LOCAL ()
+        SEP (
+          data_at (cs := CompSpecs) Ews t_queue (first, last) p;
+          mem_mgr gv;
+          malloc_token Ews t_cell vret;
+          data_at (cs := CompSpecs) Ews t_cell (Vint (Int.repr i), Vlong (Int64.repr 0)) vret;
+          queuerep (l) first last;
+          malloc_token Ews t_queue p))
+      (R' :=
+        PROP ()
+        LOCAL ()
+        SEP (
+          data_at (cs := CompSpecs) Ews t_queue (first, last) p;
+          mem_mgr gv;
+          queuerep (l ++ [i]) first vret;
+          malloc_token Ews t_queue p)).
+    {
+      entailer!.
+    }
+    {
+      Exists first vret.
+      entailer!.
+    }
+    apply semax_frame'.
     generalize dependent first.
-    intros.
     induction l as [| x l' IH ].
     {
       intros.

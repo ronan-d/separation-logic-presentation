@@ -120,27 +120,29 @@ Definition new_queue_spec : ident * funspec :=
   PRE [ ]
     PROP () PARAMS() GLOBALS(gv) SEP (mem_mgr gv)
   POST [ tptr t_queue ]
-    EX p: val, PROP ( ) RETURN (p) SEP (queue nil p; mem_mgr gv).
+    EX q: val, PROP ( ) RETURN (q) SEP (queue nil q; mem_mgr gv).
 
 Definition enqueue_spec : ident * funspec :=
   DECLARE _enqueue
-  WITH p: val, i: Z, l: list Z, gv: globals
+  WITH q: val, i: Z, l: list Z, gv: globals
   PRE [ tptr t_queue, tint ]
     PROP (Int.min_signed <= i <= Int.max_signed)
-    PARAMS (p; Vint (Int.repr i)) GLOBALS(gv)
-    SEP (queue l p; mem_mgr gv)
+    PARAMS (q; Vint (Int.repr i))
+    GLOBALS(gv)
+    SEP (queue l q; mem_mgr gv)
   POST [ tvoid ]
-    PROP ( ) RETURN () SEP (queue (l ++ [i]) p; mem_mgr gv).
+    PROP ( ) RETURN () SEP (queue (l ++ [i]) q; mem_mgr gv).
 
 Definition dequeue_spec : ident * funspec :=
   DECLARE _dequeue
-  WITH p: val, i: Z, l: list Z, gv: globals
+  WITH q: val, i: Z, l: list Z, gv: globals
   PRE [ tptr t_queue ]
     PROP ()
-    PARAMS (p) GLOBALS(gv)
-    SEP (queue (i :: l) p; mem_mgr gv)
+    PARAMS (q)
+    GLOBALS(gv)
+    SEP (queue (i :: l) q; mem_mgr gv)
   POST [ tint ]
-    PROP ( ) RETURN (Vint (Int.repr i)) SEP (queue l p; mem_mgr gv).
+    PROP ( ) RETURN (Vint (Int.repr i)) SEP (queue l q; mem_mgr gv).
 
  Definition Gprog : funspecs :=
         ltac:(with_library prog [
@@ -216,12 +218,12 @@ Proof.
   deadvars!.
   forward_if (
     PROP ()
-    LOCAL (temp _cell__1 vret; temp _q p)
-    SEP (EX first',
-      queuerep (l ++ [i]) first' vret *
+    LOCAL (temp _cell__1 vret; temp _q q)
+    SEP (EX new_first,
+      queuerep (l ++ [i]) new_first vret *
       mem_mgr gv *
-      malloc_token Ews t_queue p *
-      data_at Ews t_queue (first', last) p)
+      malloc_token Ews t_queue q *
+      data_at Ews t_queue (new_first, last) q)
   ).
   {
     subst first.
@@ -243,11 +245,11 @@ Proof.
     apply semax_post' with
       (R' :=
         PROP ()
-        LOCAL (temp _t'3 last; temp _cell__1 vret; temp _q p)
+        LOCAL (temp _t'3 last; temp _cell__1 vret; temp _q q)
         SEP (
           mem_mgr gv;
-          malloc_token Ews t_queue p;
-          data_at (cs := CompSpecs) Ews t_queue (first, last) p;
+          malloc_token Ews t_queue q;
+          data_at (cs := CompSpecs) Ews t_queue (first, last) q;
           queuerep (l ++ [i]) first vret)).
     {
       Exists first.
@@ -286,21 +288,21 @@ Proof.
     simpl.
     rewrite queuerep_cons_cons with (l := (l'' ++ [i])).
     rewrite queuerep_cons_cons with (l := (l'')).
-    Intros p0.
+    Intros first'.
     apply semax_post' with (R' :=
       PROP ()
-      LOCAL (temp _t'3 last; temp _cell__1 vret; temp _q p)
+      LOCAL (temp _t'3 last; temp _cell__1 vret; temp _q q)
       SEP (
         malloc_token Ews t_cell first;
-        data_at (cs := CompSpecs) Ews t_cell (Vint (Int.repr x), p0) first;
-        queuerep (x' :: l'' ++ [i]) p0 vret)).
+        data_at (cs := CompSpecs) Ews t_cell (Vint (Int.repr x), first') first;
+        queuerep (x' :: l'' ++ [i]) first' vret)).
     {
       entailer.
-      Exists p0.
+      Exists first'.
       entailer!.
     }
-    specialize (IH p0).
-    assert_PROP (p0 <> nullval).
+    specialize (IH first').
+    assert_PROP (first' <> nullval).
     {
       entailer!.
       destruct H7 as [H7 _].

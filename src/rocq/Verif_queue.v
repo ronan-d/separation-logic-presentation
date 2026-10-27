@@ -252,7 +252,7 @@ Proof.
     apply semax_pre_post' with
       (P' :=
         PROP ()
-        LOCAL ()
+        LOCAL (temp _t'3 last; temp _cell__1 vret; gvars gv)
         SEP (
           data_at (cs := CompSpecs) Ews t_queue (first, last) p;
           mem_mgr gv;
@@ -262,7 +262,7 @@ Proof.
           malloc_token Ews t_queue p))
       (R' :=
         PROP ()
-        LOCAL ()
+        LOCAL (temp _t'3 last; temp _cell__1 vret; gvars gv)
         SEP (
           data_at (cs := CompSpecs) Ews t_queue (first, last) p;
           mem_mgr gv;
@@ -290,17 +290,15 @@ Proof.
     destruct l' as [| x' l'' ].
     {
       intros.
+      simpl.
       unfold queuerep.
       assert_PROP (first = last).
       {
         entailer.
       }
       subst last.
+      Intros.
       forward.
-      Exists first vret.
-      entailer.
-      cbn.
-      unfold queuerep.
       Exists vret.
       entailer!.
     }

@@ -1,0 +1,20 @@
+digraph List {
+    rankdir = BT;
+
+    p [shape = diamond,label = p]
+
+    node [shape=box];
+
+    subgraph cells {
+        rank=same;
+
+        c1 [label = "\"Alabama\""]
+        c2 [label = "…"]
+        c3 [label = "\"Wyoming\""]
+
+        c1 -> c2;
+        c2 -> c3;
+    }
+
+    p -> c1;
+}

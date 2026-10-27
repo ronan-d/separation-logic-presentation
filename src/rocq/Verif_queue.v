@@ -228,9 +228,9 @@ Proof.
   deadvars!.
   forward_if (
     PROP ()
-    LOCAL (temp _q p)
-    SEP (EX first' last',
-      queuerep (l ++ [i]) first' last' *
+    LOCAL (temp _cell__1 vret; temp _q p)
+    SEP (EX first',
+      queuerep (l ++ [i]) first' vret *
       mem_mgr gv *
       malloc_token Ews t_queue p *
       data_at Ews t_queue (first', last) p)
@@ -242,12 +242,13 @@ Proof.
     destruct H6 as [H6 _].
     specialize (H6 (eq_refl _)).
     subst l.
-    Exists vret vret.
+    Exists vret.
     cbn.
     unfold queuerep.
     entailer!.
   }
   {
+    deadvars!.
     forward.
     autorewrite with norm.
     focus_SEP 0 3 4.
@@ -261,7 +262,7 @@ Proof.
           data_at (cs := CompSpecs) Ews t_queue (first, last) p;
           queuerep (l ++ [i]) first vret)).
     {
-      Exists first vret.
+      Exists first.
       entailer!.
     }
     apply semax_frame'.
@@ -300,7 +301,7 @@ Proof.
     Intros p0.
     apply semax_post' with (R' :=
       PROP ()
-      LOCAL (temp _t'3 last; temp _cell__1 vret; gvars gv)
+      LOCAL (temp _t'3 last; temp _cell__1 vret; temp _q p)
       SEP (
         malloc_token Ews t_cell first;
         data_at (cs := CompSpecs) Ews t_cell (Vint (Int.repr x), p0) first;
@@ -324,6 +325,10 @@ Proof.
     apply semax_frame'.
     exact IH.
   }
-  Intros first' last'.
+  Intros first'.
   forward.
+  entailer!.
+  unfold queue.
+  Exists first' vret.
+  entailer!.
 Qed.

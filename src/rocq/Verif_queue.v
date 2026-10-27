@@ -230,7 +230,8 @@ Proof.
     LOCAL ()
     SEP (EX first' last',
       queuerep (l ++ [i]) first' last' *
-      mem_mgr gv * malloc_token Ews t_queue p *
+      mem_mgr gv *
+      malloc_token Ews t_queue p *
       data_at Ews t_queue (first', last) p)
   ).
   {
@@ -249,32 +250,22 @@ Proof.
     forward.
     autorewrite with norm.
     deadvars!.
-    apply semax_pre_post' with
-      (P' :=
-        PROP ()
-        LOCAL (temp _t'3 last; temp _cell__1 vret; gvars gv)
-        SEP (
-          data_at (cs := CompSpecs) Ews t_queue (first, last) p;
-          mem_mgr gv;
-          malloc_token Ews t_cell vret;
-          data_at (cs := CompSpecs) Ews t_cell (Vint (Int.repr i), Vlong (Int64.repr 0)) vret;
-          queuerep (l) first last;
-          malloc_token Ews t_queue p))
+    focus_SEP 0 3 4.
+    apply semax_post' with
       (R' :=
         PROP ()
         LOCAL (temp _t'3 last; temp _cell__1 vret; gvars gv)
         SEP (
-          data_at (cs := CompSpecs) Ews t_queue (first, last) p;
           mem_mgr gv;
-          queuerep (l ++ [i]) first vret;
-          malloc_token Ews t_queue p)).
-    {
-      entailer!.
-    }
+          malloc_token Ews t_queue p;
+          data_at (cs := CompSpecs) Ews t_queue (first, last) p;
+          queuerep (l ++ [i]) first vret)).
     {
       Exists first vret.
       entailer!.
     }
+    apply semax_frame'.
+    apply semax_frame'.
     apply semax_frame'.
     generalize dependent first.
     induction l as [| x l' IH ].
@@ -307,11 +298,19 @@ Proof.
     rewrite queuerep_cons_cons with (l := (l'' ++ [i])).
     rewrite queuerep_cons_cons with (l := (l'')).
     Intros p0.
-    focus_SEP 4.
-    apply semax_frame'.
+    apply semax_post' with (R' :=
+      PROP ()
+      LOCAL (temp _t'3 last; temp _cell__1 vret; gvars gv)
+      SEP (
+        malloc_token Ews t_cell first;
+        data_at (cs := CompSpecs) Ews t_cell (Vint (Int.repr x), p0) first;
+        queuerep (x' :: l'' ++ [i]) p0 vret)).
+    {
+      entailer.
+      Exists p0.
+      entailer!.
+    }
     specialize (IH p0).
-    autorewrite with norm.
-    autorewrite with norm in IH.
     assert_PROP (p0 <> nullval).
     {
       entailer!.
@@ -320,8 +319,9 @@ Proof.
       inversion H7.
     }
     specialize (IH H1).
-    eapply semax_pre_post'.
-    3: exact IH.
-    - entailer!.
+    focus_SEP 2 3.
+    apply semax_frame'.
+    apply semax_frame'.
+    exact IH.
   }
 Qed.

@@ -249,8 +249,10 @@ Proof.
     forward.
     autorewrite with norm.
     deadvars!.
+    frame_SEP 1.
     freeze FR1 := (data_at Ews t_queue _ p).
     generalize dependent first.
+    intros.
     induction l as [| x l' IH ].
     {
       intros.

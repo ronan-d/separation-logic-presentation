@@ -303,8 +303,12 @@ Proof.
       entailer!.
     }
     intros.
-    rewrite queuerep_cons_cons.
+    simpl.
+    rewrite queuerep_cons_cons with (l := (l'' ++ [i])).
+    rewrite queuerep_cons_cons with (l := (l'')).
     Intros p0.
+    focus_SEP 4.
+    apply semax_frame'.
     specialize (IH p0).
     autorewrite with norm.
     autorewrite with norm in IH.

@@ -225,6 +225,9 @@ Proof.
   forward.
   forward.
   forward.
+  Compute (reptype t_queue).
+  Check ((first, last) : reptype t_queue).
+  remember ((first, last) : reptype t_queue) as val0.
   forward_if (
     PROP ()
     LOCAL ()
@@ -249,8 +252,6 @@ Proof.
     forward.
     autorewrite with norm.
     deadvars!.
-    Compute (reptype t_queue).
-    remember ((first, last) : reptype t_queue) as val0.
     apply semax_post with (R' := normal_ret_assert
       (PROP ()
       LOCAL ()

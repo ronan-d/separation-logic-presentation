@@ -249,6 +249,16 @@ Proof.
     forward.
     autorewrite with norm.
     deadvars!.
+    Compute (reptype t_queue).
+    remember ((first, last) : reptype t_queue) as val0.
+    apply semax_post with (R' := normal_ret_assert
+      (PROP ()
+      LOCAL ()
+      SEP (
+        mem_mgr gv;
+        queuerep (l ++ [i]) first vret;
+        malloc_token Ews t_queue p))).
+    Check semax_post.
     frame_SEP 1.
     freeze FR1 := (data_at Ews t_queue _ p).
     generalize dependent first.

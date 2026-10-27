@@ -225,9 +225,10 @@ Proof.
   forward.
   forward.
   forward.
+  deadvars!.
   forward_if (
     PROP ()
-    LOCAL ()
+    LOCAL (temp _q p)
     SEP (EX first' last',
       queuerep (l ++ [i]) first' last' *
       mem_mgr gv *
@@ -249,12 +250,11 @@ Proof.
   {
     forward.
     autorewrite with norm.
-    deadvars!.
     focus_SEP 0 3 4.
     apply semax_post' with
       (R' :=
         PROP ()
-        LOCAL (temp _t'3 last; temp _cell__1 vret; gvars gv)
+        LOCAL (temp _t'3 last; temp _cell__1 vret; temp _q p)
         SEP (
           mem_mgr gv;
           malloc_token Ews t_queue p;
@@ -324,4 +324,6 @@ Proof.
     apply semax_frame'.
     exact IH.
   }
+  Intros first' last'.
+  forward.
 Qed.

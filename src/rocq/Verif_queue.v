@@ -311,13 +311,13 @@ Proof.
     assert_PROP (p0 <> nullval).
     {
       entailer!.
-      destruct H10 as [H10 _].
-      specialize (H10 (eq_refl _)).
-      inversion H10.
+      destruct H7 as [H7 _].
+      specialize (H7 (eq_refl _)).
+      inversion H7.
     }
     specialize (IH H1).
-    eapply semax_pre_post.
-    6: exact IH.
+    eapply semax_pre_post'.
+    3: exact IH.
     - entailer!.
   }
 Qed.

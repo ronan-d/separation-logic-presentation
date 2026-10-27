@@ -186,18 +186,6 @@ Proof.
   entailer!.
 Qed.
 
-Check semax.
-Check statement.
-Print statement.
-Check expr.
-Print expr.
-
-(* Lemma enqueue_lemma : forall Delta first last new_cell,
-  semax Delta
-    (todo)
-    (todo)
-    (todo) *)
-
 Lemma body_enqueue: semax_body Vprog Gprog f_enqueue enqueue_spec.
 Proof.
   start_function.
@@ -330,5 +318,43 @@ Proof.
   entailer!.
   unfold queue.
   Exists first' vret.
+  entailer!.
+Qed.
+
+Lemma body_new_queue : semax_body Vprog Gprog f_new_queue new_queue_spec.
+Proof.
+  start_function.
+  forward_call (t_queue, gv).
+  Intros vret.
+  destruct (eq_dec vret nullval).
+  {
+    subst vret.
+    forward_if (False).
+    - forward_call (1).
+      entailer.
+    - exfalso.
+      apply H.
+      reflexivity.
+  }
+  forward_if (True).
+  {
+    exfalso.
+    apply n.
+    exact H.
+  }
+  {
+    forward.
+    entailer!.
+  }
+  Intros.
+  forward.
+  forward.
+  forward.
+  Exists vret.
+  entailer!.
+  unfold queue.
+  Exists nullval nullval.
+  entailer!.
+  unfold queuerep.
   entailer!.
 Qed.

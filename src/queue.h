@@ -2,8 +2,8 @@
 
 struct queue;
 
-struct queue *new_queue (void);
+struct queue *new_queue(void);
 
-void enqueue (struct queue *q, int n);
+void enqueue(struct queue *q, int n);
 
-int dequeue (struct queue *q);
+int dequeue(struct queue *q);

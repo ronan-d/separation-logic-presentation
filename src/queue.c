@@ -2,25 +2,21 @@
 
 #include <stdlib.h>
 
-struct cell
-{
+struct cell {
   int element;
   struct cell *next;
 };
 
-struct queue
-{
+struct queue {
   struct cell *first;
   struct cell *last;
 };
 
-struct queue *
-new_queue (void)
-{
-  struct queue *p = malloc (sizeof (*p));
+struct queue *new_queue(void) {
+  struct queue *p = malloc(sizeof(*p));
 
   if (!p)
-    exit (1);
+    exit(1);
 
   p->first = NULL;
   p->last = NULL;
@@ -28,38 +24,31 @@ new_queue (void)
   return p;
 }
 
-void
-enqueue (struct queue *q, int n)
-{
-  struct cell *cell = malloc (sizeof (*cell));
+void enqueue(struct queue *q, int n) {
+  struct cell *cell = malloc(sizeof(*cell));
 
   if (!cell)
-    exit (1);
+    exit(1);
 
   cell->element = n;
   cell->next = NULL;
 
-  if (q->first == NULL)
-    {
-      q->first = cell;
-    }
-  else
-    {
-      q->last->next = cell;
-    }
+  if (q->first == NULL) {
+    q->first = cell;
+  } else {
+    q->last->next = cell;
+  }
 
   q->last = cell;
 }
 
-int
-dequeue (struct queue *q)
-{
+int dequeue(struct queue *q) {
   struct cell *c = q->first;
 
   int res = c->element;
   q->first = c->next;
 
-  free (c);
+  free(c);
 
   return res;
 }

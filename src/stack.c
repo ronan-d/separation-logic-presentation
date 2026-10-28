@@ -1,10 +1,8 @@
-struct cell
-{
+struct cell {
   int element;
   struct cell *next;
 };
 
-struct stack
-{
+struct stack {
   struct cell *first;
 };

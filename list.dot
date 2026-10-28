@@ -1,28 +1,37 @@
 digraph List {
     rankdir = BT;
 
-    p [shape = diamond, label = p, group = "first"]
+    p [shape = diamond, label = p]
 
     node [shape=box];
 
     subgraph cells {
         rank=same;
 
-        c1 [group = "first", shape=plaintext, margin=0, label = <
+        c1 [shape=plain, margin=0, label = <
             <TABLE BORDER="0" CELLBORDER="1" CELLSPACING="0" CELLPADDING="4">
                 <TR>
-                    <TD> "Alabama" </TD>
+                    <TD PORT="elem"> "Alabama" </TD>
                     <TD PORT="link">Link</TD>
                 </TR>
             </TABLE>
         >]
-        c2 [label = "…"]
-        c3 [label = "\"Wyoming\""]
 
-        c1 -> c2 [tailclip = false, tailport = link];
+        c2 [shape=ellipse, style = dotted, label = "…"]
+
+        c3 [shape=none, margin=0, label = <
+            <TABLE BORDER="0" CELLBORDER="1" CELLSPACING="0" CELLPADDING="4">
+                <TR>
+                    <TD> "Wyoming" </TD>
+                    <TD PORT="link">Link</TD>
+                </TR>
+            </TABLE>
+        >]
+
+        c1 -> c2;
         c2 -> c3;
     }
 
-    p -> c1 [headport = w];
+    p -> c1:elem:sw;
     // p -> c3;
 }

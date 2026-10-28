@@ -151,14 +151,14 @@ begin
 
 ![](Hoare.png){style="display: block; margin: auto;"}
 
-Link: [https://dx.doi.org/10.1145%2F363235.363259](https://dx.doi.org/10.1145%2F363235.363259)
+Link [here](https://dx.doi.org/10.1145%2F363235.363259).
 
 {pause up}
 ### 1967: Floyd paper
 
 ![](Floyd.png){style="display: block; margin: auto; margin-bottom: 2em;"}
 
-Link: [https://people.eecs.berkeley.edu/~necula/Papers/FloydMeaning.pdf](https://people.eecs.berkeley.edu/~necula/Papers/FloydMeaning.pdf)
+Link [here](https://people.eecs.berkeley.edu/~necula/Papers/FloydMeaning.pdf).
 
 {pause up}
 ### 1984: Morris and Jones dig out and clean up…
@@ -168,23 +168,22 @@ Link: [https://people.eecs.berkeley.edu/~necula/Papers/FloydMeaning.pdf](https:/
 
 ![Turing paper](Turing-ink.png){style="display: block; margin: auto;"}
 
-Link: https://craigtrim.com/articles/program-verification-1949/reader/
+Link [here](https://craigtrim.com/articles/program-verification-1949/reader/).
 
 {pause up}
 ### 1972: Burstall tries pointers but gives up
 
-{pause blockquote}
-The verification proofs are quite long for such a simple mat-
-ter and very boring. We will not weary the reader with them ;
-instead we will try to do better.
+{blockquote .block}
+*The verification proofs are quite long for such a simple matter and very boring.
+We will not weary the reader with them ;
+instead we will try to do better.*
 
-Link: couldn't find a direct one. The lecture I got the info from (in French):
-https://www.college-de-france.fr/fr/agenda/cours/logiques-de-programmes-quand-la-machine-raisonne-sur-ses-logiciels/pointeurs-et-structures-de-donnees-la-logique-de-separation
+Link: couldn't find a direct one. Lecture I got the info from (in French)
+[here](https://www.college-de-france.fr/fr/agenda/cours/logiques-de-programmes-quand-la-machine-raisonne-sur-ses-logiciels/pointeurs-et-structures-de-donnees-la-logique-de-separation).
 
 {pause up}
 ### 2002: "Separation logic" appears
 
-{pause}
 ![](Reynolds.png){style="display: block; margin: auto; zoom: 0.6;"}
 
 {pause up}

@@ -402,3 +402,181 @@ end.
 > ```math
 > p(n_{1} :: n_{2} :: l) := (first \mapsto (n_{1}, y)) * p (l) (y)
 > ```
+
+{pause up}
+### An operation: enqueue
+
+{pause}
+```c
+void enqueue(struct queue *q, int n) {
+  struct cell *cell = malloc(sizeof(*cell));
+
+  if (!cell)
+    exit(1);
+
+  cell->element = n;
+  cell->next = NULL;
+
+  if (q->first == NULL) {
+    q->first = cell;
+  } else {
+    q->last->next = cell;
+  }
+
+  q->last = cell;
+}
+```
+
+{pause center}
+```coq
+Definition enqueue_spec : ident * funspec :=
+  DECLARE _enqueue
+  WITH q: val, i: Z, l: list Z, gv: globals
+  PRE [ tptr t_queue, tint ]
+    PROP (Int.min_signed <= i <= Int.max_signed)
+    PARAMS (q; Vint (Int.repr i))
+    GLOBALS(gv)
+    SEP (queue l q; mem_mgr gv)
+  POST [ tvoid ]
+    PROP ( ) RETURN () SEP (queue (l ++ [i]) q; mem_mgr gv).
+```
+
+{pause up}
+
+{scroll}
+```coq
+Lemma body_enqueue: semax_body Vprog Gprog f_enqueue enqueue_spec.
+Proof.
+  start_function.
+  forward_call (t_cell, gv).
+  Intros vret.
+  destruct (eq_dec vret nullval).
+  {
+    subst vret.
+    forward_if (False).
+    - forward_call (1).
+      entailer.
+    - forward.
+      entailer.
+  }
+  forward_if (True).
+  {
+    forward_call (1).
+    entailer.
+  }
+  {
+    forward.
+    entailer.
+  }
+  Intros.
+  forward.
+  forward.
+  forward.
+  deadvars!.
+  forward_if (
+    PROP ()
+    LOCAL (temp _cell__1 vret; temp _q q)
+    SEP (EX new_first,
+      queuerep (l ++ [i]) new_first vret *
+      mem_mgr gv *
+      malloc_token Ews t_queue q *
+      data_at Ews t_queue (new_first, last) q)
+  ).
+  {
+    subst first.
+    forward.
+    entailer.
+    destruct H6 as [H6 _].
+    specialize (H6 (eq_refl _)).
+    subst l.
+    Exists vret.
+    cbn.
+    unfold queuerep.
+    entailer!.
+  }
+  {
+    deadvars!.
+    forward.
+    autorewrite with norm.
+    focus_SEP 0 3 4.
+    apply semax_post' with
+      (R' :=
+        PROP ()
+        LOCAL (temp _t'3 last; temp _cell__1 vret; temp _q q)
+        SEP (
+          mem_mgr gv;
+          malloc_token Ews t_queue q;
+          data_at (cs := CompSpecs) Ews t_queue (first, last) q;
+          queuerep (l ++ [i]) first vret)).
+    {
+      Exists first.
+      entailer!.
+    }
+    apply semax_frame'.
+    apply semax_frame'.
+    apply semax_frame'.
+    generalize dependent first.
+    induction l as [| x l' IH ].
+    {
+      intros.
+      assert_PROP (False).
+      {
+        unfold queuerep.
+        entailer.
+      }
+      contradiction.
+    }
+    destruct l' as [| x' l'' ].
+    {
+      intros.
+      simpl.
+      unfold queuerep.
+      assert_PROP (first = last).
+      {
+        entailer.
+      }
+      subst last.
+      Intros.
+      forward.
+      Exists vret.
+      entailer!.
+    }
+    intros.
+    simpl.
+    rewrite queuerep_cons_cons with (l := (l'' ++ [i])).
+    rewrite queuerep_cons_cons with (l := (l'')).
+    Intros first'.
+    apply semax_post' with (R' :=
+      PROP ()
+      LOCAL (temp _t'3 last; temp _cell__1 vret; temp _q q)
+      SEP (
+        malloc_token Ews t_cell first;
+        data_at (cs := CompSpecs) Ews t_cell (Vint (Int.repr x), first') first;
+        queuerep (x' :: l'' ++ [i]) first' vret)).
+    {
+      entailer.
+      Exists first'.
+      entailer!.
+    }
+    specialize (IH first').
+    assert_PROP (first' <> nullval).
+    {
+      entailer!.
+      destruct H7 as [H7 _].
+      specialize (H7 (eq_refl _)).
+      inversion H7.
+    }
+    specialize (IH H1).
+    focus_SEP 2 3.
+    apply semax_frame'.
+    apply semax_frame'.
+    exact IH.
+  }
+  Intros first'.
+  forward.
+  entailer!.
+  unfold queue.
+  Exists first' vret.
+  entailer!.
+Qed.
+```

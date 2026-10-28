@@ -4,7 +4,7 @@ digraph Heap {
     node [shape=box];
 
     v [label=v];
-    x [shape=diamond,label=x];
+    p [shape=diamond,label=p];
 
-    x -> v;
+    p -> v;
 }

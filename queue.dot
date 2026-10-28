@@ -1,0 +1,44 @@
+digraph List {
+    rankdir = BT;
+
+    queue [shape = plain, margin = 0, label = <
+        <TABLE BORDER="0" CELLBORDER="1" CELLSPACING="0" CELLPADDING="4">
+            <TR>
+                <TD PORT="f">first</TD>
+                <TD PORT="l">last</TD>
+            </TR>
+        </TABLE>
+    >]
+
+    node [shape=box];
+
+    subgraph cells {
+        rank=same;
+
+        c1 [shape=plain, margin=0, label = <
+            <TABLE BORDER="0" CELLBORDER="1" CELLSPACING="0" CELLPADDING="4">
+                <TR>
+                    <TD PORT="elem">"Alabama"</TD>
+                    <TD PORT="link">    </TD>
+                </TR>
+            </TABLE>
+        >]
+
+        c2 [shape=ellipse, style = dotted, label = "…"]
+
+        c3 [shape=none, margin=0, label = <
+            <TABLE BORDER="0" CELLBORDER="1" CELLSPACING="0" CELLPADDING="4">
+                <TR>
+                    <TD PORT="elem">"Wyoming"</TD>
+                    <TD PORT="link">NULL</TD>
+                </TR>
+            </TABLE>
+        >]
+
+        c1 -> c2;
+        c2 -> c3;
+    }
+
+    queue:f:n -> c1:elem:s;
+    queue:l:n -> c3:elem:s;
+}

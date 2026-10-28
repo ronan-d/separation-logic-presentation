@@ -205,14 +205,14 @@ Link: couldn't find a direct one. Lecture I got the info from (in French)
 ### "Points-to" assertions
 
 ```math
-x \mapsto v
+p \mapsto v
 ```
 
 {pause}
-"$x$ points to $v$"
+"$p$ points to $v$"
 
 {pause}
-"The variable $x$ holds the address of a memory location that contains the value $v$"
+"The variable $p$ holds the address of a memory location that contains the value $v$"
 
 <style>
   .slipshow-svg-container { display: block; }
@@ -287,16 +287,22 @@ A \land B \land \text{"the memory footprints of $A$ and $B$ are disjoint"}
 {pause}
 ### First part: singly linked list
 
-Everything works very nicely: `Box`, `Option` and ownership rules make it possible
-to write a very nice stack.
-
-{pause}
-But what if we wanted to use our linked list as…
-
-{pause}
-### …a queue?
-
 {pause center}
+> ![Singly](list.dot.svg){style="display: block; margin: auto;"}
+> 
+> {pause}
+> Everything works very nicely: `Box`, `Option` and ownership rules make it possible
+> to write a very nice stack.
+> 
+> {pause}
+> But what if we wanted to use our linked list as…
+
+{pause #queue}
+> ### …a queue?
+>
+> {pause center=queue}
+> ![Singly](queue.dot.svg){style="display: block; margin: auto;"}
+>
 > First attempt with `Rc` and `Refcell` but it gets very unergonomic.
 > 
 > {pause}

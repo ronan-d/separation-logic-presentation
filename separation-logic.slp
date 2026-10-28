@@ -327,3 +327,8 @@ Verifications are Rocq developments using a specialized library.
 ### Warm up: stack
 
 {pause}
+![Singly](list.dot.svg)
+
+{pause}
+```c
+```

@@ -23,6 +23,6 @@ digraph List {
         c2 -> c3;
     }
 
-    p -> c1 [headport = sw];
-    p -> c3;
+    p -> c1 [headport = w];
+    // p -> c3;
 }

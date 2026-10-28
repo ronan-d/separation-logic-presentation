@@ -261,7 +261,7 @@ Approximately:
 
 {pause}
 ```math
-A \land B \land \text{"the memory footprints of $A$ and $B$ are disjoint"}
+A \land B \land \text{"the footprints of $A$ and $B$ are disjoint"}
 ```
 
 {pause center}

@@ -288,7 +288,7 @@ A \land B \land \text{"the memory footprints of $A$ and $B$ are disjoint"}
 ### First part: singly linked list
 
 {pause center}
-> ![Singly](list.dot.svg){style="display: block; margin: auto;"}
+> ![Singly](list.dot.svg)
 > 
 > {pause}
 > Everything works very nicely: `Box`, `Option` and ownership rules make it possible

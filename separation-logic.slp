@@ -292,7 +292,7 @@ A \land B \land \text{"the memory footprints of $A$ and $B$ are disjoint"}
 > 
 > {pause}
 > Everything works very nicely: `Box`, `Option` and ownership rules make it possible
-> to write a very nice stack.
+> to write a neat stack.
 > 
 > {pause}
 > But what if we wanted to use our linked list as…

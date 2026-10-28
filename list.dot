@@ -30,6 +30,6 @@ digraph List {
         c2 -> c3;
     }
 
-    p -> c1:elem:sw;
+    p -> c1:elem:s;
     // p -> c3;
 }

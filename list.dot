@@ -8,11 +8,18 @@ digraph List {
     subgraph cells {
         rank=same;
 
-        c1 [label = "\"Alabama\"", group = "first"]
+        c1 [group = "first", shape=plaintext, margin=0, label = <
+            <TABLE BORDER="0" CELLBORDER="1" CELLSPACING="0" CELLPADDING="4">
+                <TR>
+                    <TD> "Alabama" </TD>
+                    <TD PORT="link">Link</TD>
+                </TR>
+            </TABLE>
+        >]
         c2 [label = "…"]
         c3 [label = "\"Wyoming\""]
 
-        c1 -> c2 [tailclip = false];
+        c1 -> c2 [tailclip = false, tailport = link];
         c2 -> c3;
     }
 

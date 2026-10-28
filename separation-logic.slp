@@ -166,7 +166,9 @@ Link: [https://people.eecs.berkeley.edu/~necula/Papers/FloydMeaning.pdf](https:/
 {pause}
 ### 1949: Turing paper
 
-![](Turing.png){style="display: block; margin: auto;"}
+![Turing paper](Turing-ink.png){style="display: block; margin: auto;"}
+
+Link: https://craigtrim.com/articles/program-verification-1949/reader/
 
 {pause up}
 ### 1972: Burstall tries pointers but gives up
@@ -176,7 +178,8 @@ The verification proofs are quite long for such a simple mat-
 ter and very boring. We will not weary the reader with them ;
 instead we will try to do better.
 
-Link:
+Link: couldn't find a direct one. The lecture I got the info from (in French):
+https://www.college-de-france.fr/fr/agenda/cours/logiques-de-programmes-quand-la-machine-raisonne-sur-ses-logiciels/pointeurs-et-structures-de-donnees-la-logique-de-separation
 
 {pause up}
 ### 2002: "Separation logic" appears

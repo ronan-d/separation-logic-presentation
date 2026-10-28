@@ -169,6 +169,16 @@ Link: [https://people.eecs.berkeley.edu/~necula/Papers/FloydMeaning.pdf](https:/
 ![](Turing.png){style="display: block; margin: auto;"}
 
 {pause up}
+### 1972: Burstall tries pointers but gives up
+
+{pause blockquote}
+The verification proofs are quite long for such a simple mat-
+ter and very boring. We will not weary the reader with them ;
+instead we will try to do better.
+
+Link:
+
+{pause up}
 ### 2002: "Separation logic" appears
 
 {pause}

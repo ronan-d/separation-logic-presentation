@@ -303,6 +303,7 @@ A \land B \land \text{"the memory footprints of $A$ and $B$ are disjoint"}
 > {pause center=queue}
 > ![Singly](queue.dot.svg){style="display: block; margin: auto;"}
 >
+> {pause}
 > First attempt with `Rc` and `Refcell` but it gets very unergonomic.
 > 
 > {pause}

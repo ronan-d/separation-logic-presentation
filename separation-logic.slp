@@ -329,6 +329,35 @@ Verifications are Rocq developments using a specialized library.
 {pause}
 ![Singly](list.dot.svg)
 
-{pause}
-```c
-```
+{pause #code}
+> ```c
+> struct cell {
+>   int element;
+>   struct cell *next;
+> };
+> 
+> struct stack {
+>   struct cell *first;
+> };
+> ```
+> 
+> {pause center=code}
+> ```coq
+> Fixpoint stackrep (l: list Z) (first: val) : mpred := match l with
+> | [] => !! (first = nullval) && emp
+> | n :: l' => EX y:val,
+>     malloc_token Ews t_cell first *
+>     data_at Ews t_cell (Vint (Int.repr n), y) first *
+>     stackrep l' y last
+> end.
+> ```
+
+{pause center}
+> More abstractly:
+> 
+> ```math
+> p([]) : first = null
+> ```
+> ```math
+> p(n :: l) = (first \mapsto (n, y)) * p (l) (y)
+> ```

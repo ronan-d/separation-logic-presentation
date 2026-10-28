@@ -356,10 +356,10 @@ Verifications are Rocq developments using a specialized library.
 > More abstractly:
 > 
 > ```math
-> p([]) := first = null
-> ```
-> ```math
-> p(n :: l) := (first \mapsto (n, y)) * p (l) (y)
+> \begin{cases}
+>   P([]) := first = null \\
+>   P(n :: l) := (first \mapsto (n, y)) * P (l) (y)
+> \end{cases}
 > ```
 
 {pause up}
@@ -394,13 +394,11 @@ end.
 
 {pause center}
 > ```math
-> p([]) := first = null
-> ```
-> ```math
-> p(n :: []) := (first = last) \land (first \mapsto (n, null))
-> ```
-> ```math
-> p(n_{1} :: n_{2} :: l) := (first \mapsto (n_{1}, y)) * p (l) (y)
+> \begin{cases}
+> P([]) := first = null \\
+> P(n :: []) := (first = last) \land (first \mapsto (n, null)) \\
+> P(n_{1} :: n_{2} :: l) := (first \mapsto (n_{1}, y)) * P (l) (y, last)
+> \end{cases}
 > ```
 
 {pause up}

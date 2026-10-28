@@ -12,10 +12,10 @@ digraph List {
         c2 [label = "…"]
         c3 [label = "\"Wyoming\""]
 
-        c1 -> c2;
+        c1 -> c2 [tailclip = false];
         c2 -> c3;
     }
 
-    p -> c1 [weigth = 2];
+    p -> c1 [headport = sw];
     p -> c3;
 }

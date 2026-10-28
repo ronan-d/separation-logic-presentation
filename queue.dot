@@ -10,27 +10,25 @@ digraph List {
         </TABLE>
     >]
 
-    node [shape=box];
-
     subgraph cells {
         rank=same;
 
-        c1 [shape=plain, margin=0, label = <
+        c1 [shape = plain, margin = 0, label = <
             <TABLE BORDER="0" CELLBORDER="1" CELLSPACING="0" CELLPADDING="4">
                 <TR>
                     <TD PORT="elem">"Alabama"</TD>
-                    <TD PORT="link">    </TD>
+                    <TD>p0</TD>
                 </TR>
             </TABLE>
         >]
 
-        c2 [shape=ellipse, style = dotted, label = "…"]
+        c2 [shape = ellipse, style = dotted, label = "…"]
 
-        c3 [shape=none, margin=0, label = <
+        c3 [shape = plain, margin = 0, label = <
             <TABLE BORDER="0" CELLBORDER="1" CELLSPACING="0" CELLPADDING="4">
                 <TR>
                     <TD PORT="elem">"Wyoming"</TD>
-                    <TD PORT="link">NULL</TD>
+                    <TD>NULL</TD>
                 </TR>
             </TABLE>
         >]

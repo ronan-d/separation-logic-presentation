@@ -11,8 +11,8 @@ digraph List {
         c1 [shape=plain, margin=0, label = <
             <TABLE BORDER="0" CELLBORDER="1" CELLSPACING="0" CELLPADDING="4">
                 <TR>
-                    <TD PORT="elem"> "Alabama" </TD>
-                    <TD PORT="link">Link</TD>
+                    <TD PORT="elem">"Alabama"</TD>
+                    <TD PORT="link">    </TD>
                 </TR>
             </TABLE>
         >]
@@ -22,8 +22,8 @@ digraph List {
         c3 [shape=none, margin=0, label = <
             <TABLE BORDER="0" CELLBORDER="1" CELLSPACING="0" CELLPADDING="4">
                 <TR>
-                    <TD> "Wyoming" </TD>
-                    <TD PORT="link">Link</TD>
+                    <TD>"Wyoming"</TD>
+                    <TD PORT="link">NULL</TD>
                 </TR>
             </TABLE>
         >]

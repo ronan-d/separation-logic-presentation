@@ -341,6 +341,10 @@ A \land B \land \text{"the footprints of $A$ and $B$ are disjoint"}
 > {pause}
 > But what if we wanted to use our linked list as…
 
+{#pointer-fiddling}
+- I don't want to give up pointers.
+- Or deductive verification.
+
 {pause #queue}
 > ### …a queue?
 >
@@ -350,7 +354,7 @@ A \land B \land \text{"the footprints of $A$ and $B$ are disjoint"}
 > {pause}
 > First attempt with `Rc` and `Refcell` but it gets very unergonomic.
 > 
-> {pause}
+> {pause speaker-note=pointer-fiddling}
 > Eventually resort to `unsafe`.
 
 {pause}

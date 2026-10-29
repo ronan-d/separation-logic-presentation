@@ -1,6 +1,10 @@
 # Separation logic
 
-{pause}
+{#part1}
+- Hoare logic refresher.
+- Why we might want to extend it.
+
+{pause speaker-note=part1}
 ## Hoare logic + pointers
 
 {pause}
@@ -75,7 +79,11 @@ the correctness of imperative programs.
 >    pragma Assert (X = Y0 and Y = X0);
 > ```
 
-{pause up}
+{#party}
+- Party trick.
+- Xor cancels.
+
+{pause up speaker-note=party}
 ### Another Hoare logic example
 
 {carousel change-page=~n:all}
@@ -122,7 +130,11 @@ the correctness of imperative programs.
 > …
 > ```
 
-{pause up}
+{#disbelief}
+- Suspend disbelief.
+- Assertion fails if `X = Y`.
+
+{pause up speaker-note=disbelief}
 ### An attempt to add pointers
 
 ```ada
@@ -153,7 +165,12 @@ begin
 
 Link [here](https://dx.doi.org/10.1145%2F363235.363259).
 
-{pause up}
+{#floyd}
+- Honorable mention.
+- Used flowcharts.
+- Less principled.
+
+{pause up speaker-note=floyd}
 ### 1967: Floyd paper
 
 ![](Floyd.png){style="display: block; margin: auto; margin-bottom: 2em;"}
@@ -163,14 +180,22 @@ Link [here](https://people.eecs.berkeley.edu/~necula/Papers/FloydMeaning.pdf).
 {pause up}
 ### 1984: Morris and Jones dig out and clean up…
 
-{pause}
+{#turing}
+- Orwell.
+- Oblivion.
+
+{pause speaker-note=turing}
 ### 1949: Turing paper
 
 ![Turing paper](Turing-ink.png){style="display: block; margin: auto;"}
 
 Link [here](https://craigtrim.com/articles/program-verification-1949/reader/).
 
-{pause up}
+{#burstall}
+- Decade of Unix and C.
+- What's a computer's memory if not...
+
+{pause up speaker-note=burstall}
 ### 1972: Burstall tries pointers but gives up
 
 {blockquote .block}

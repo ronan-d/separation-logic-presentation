@@ -384,7 +384,11 @@ Verifications are Rocq developments using a specialized library.
 {pause}
 ![Singly](list.dot.svg)
 
-{pause #code}
+{#c-code}
+- C code does not say much about pointers.
+- Does predicate allow cycles?
+
+{pause #code speaker-note=c-code}
 > ```c
 > struct cell {
 >   int element;

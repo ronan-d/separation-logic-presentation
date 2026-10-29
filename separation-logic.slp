@@ -303,7 +303,7 @@ A \land B \land \text{"the footprints of $A$ and $B$ are disjoint"}
 > 
 > ![Diagram 2](heap2.dot.svg)
 
-[#pervasive]
+{#pervasive}
 - Conjunction is omnipresent.
 - We replace it everywhere.
 - This deeply influences how proofs work.
@@ -360,12 +360,19 @@ A \land B \land \text{"the footprints of $A$ and $B$ are disjoint"}
 {pause}
 The goal: **implement this queue with full deductive verification**.
 
-{pause up}
+{#mainstream}
+- No tool as mainstream as Rust.
+
+{pause up speaker-note=mainstream}
 ## Verified Software Toolchain
 
 ![Verified Software Toolchain logo](VST.gif){style="display: block; margin: auto; zoom: 0.6;"}
 
-{pause}
+{#c-lang}
+- +: Universally known.
+- -: No generics.
+
+{pause speaker-note=c-lang}
 The programming language is C.
 
 {pause}

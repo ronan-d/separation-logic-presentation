@@ -227,7 +227,10 @@ Link: couldn't find a direct one. Lecture I got the info from (in French)
 {pause}
 - In separation logic, we manipulate **assertions**.
 
-{pause}
+{#same-as-hoare}
+- Not different from Hoare logic.
+
+{pause speaker-note=same-as-hoare}
 - An assertion says something about an implicit **heap fragment**.
 
 {pause up}
@@ -261,7 +264,7 @@ p \mapsto v
 ### Footprints
 
 {.definition pause}
-The **footprint** of an assertion is the set the locations that are mentioned in the assertion.
+The **footprint** of an assertion is the set of the locations that are mentioned in the assertion.
 
 {pause up}
 ### Separating conjunction

@@ -303,17 +303,29 @@ A \land B \land \text{"the footprints of $A$ and $B$ are disjoint"}
 > 
 > ![Diagram 2](heap2.dot.svg)
 
-{pause center}
+[#pervasive]
+- Conjunction is omnipresent.
+- We replace it everywhere.
+- This deeply influences how proofs work.
+
+{pause center speaker-note=pervasive}
 > #### Another example (always false):
 >
 > ```math
 > p \mapsto \text{"hello"} * p \mapsto \text{"hello"}
 > ```
 
-{pause up}
+{#motivation}
+- Why should we care?
+- How I started caring.
+
+{pause up speaker-note=motivation}
 ## Motivating example
 
-{pause}
+{#slow-paced}
+- I recommend for beginners; otherwise a bit slow-paced.
+
+{pause speaker-note=slow-paced}
 ![Too many lists](Too-many-lists.png){style="display: block; margin: auto;"}
 
 {pause}

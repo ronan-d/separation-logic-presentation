@@ -193,7 +193,8 @@ Link [here](https://craigtrim.com/articles/program-verification-1949/reader/).
 
 {#burstall}
 - Decade of Unix and C.
-- What's a computer's memory if not...
+- What's a computer's memory if not…
+- Apologetic note.
 
 {pause up speaker-note=burstall}
 ### 1972: Burstall tries pointers but gives up
@@ -206,7 +207,10 @@ instead we will try to do better.*
 Link: couldn't find a direct one. Lecture I got the info from (in French)
 [here](https://www.college-de-france.fr/fr/agenda/cours/logiques-de-programmes-quand-la-machine-raisonne-sur-ses-logiciels/pointeurs-et-structures-de-donnees-la-logique-de-separation).
 
-{pause up}
+{#first-paper}
+- First with name but not ideas.
+
+{pause up speaker-note=first-paper}
 ### 2002: "Separation logic" appears
 
 ![](Reynolds.png){style="display: block; margin: auto; zoom: 0.6;"}

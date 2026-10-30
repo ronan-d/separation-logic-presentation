@@ -341,21 +341,18 @@ A \land B \land \text{"the footprints of $A$ and $B$ are disjoint"}
 > {pause}
 > But what if we wanted to use our linked list as…
 
-{#pointer-fiddling}
+{#queue-notes}
+- 1st: references and lifetimes.
+- 2nd: `Rc` and `Refcell`.
+- 3rd: `unsafe`.
 - I don't want to give up pointers.
 - Or deductive verification.
 
 {pause #queue}
 > ### …a queue?
 >
-> {pause center=queue}
+> {pause center=queue speaker-note=queue-notes}
 > ![Singly](queue.dot.svg){style="display: block; margin: auto;"}
->
-> {pause}
-> First attempt with `Rc` and `Refcell` but it gets very unergonomic.
-> 
-> {pause speaker-note=pointer-fiddling}
-> Eventually resort to `unsafe`.
 
 {pause}
 The goal: **implement this queue with full deductive verification**.

@@ -3,7 +3,7 @@
 {#part1}
 - Hoare logic refresher.
 - Why we might want to extend it.
-- Verify imperative program correctness
+- Verify imperative program correctness.
 
 {pause speaker-note=part1}
 ## Hoare logic + pointers
@@ -328,22 +328,20 @@ A \land B \land \text{"the footprints of $A$ and $B$ are disjoint"}
 {pause}
 ### First part: singly linked list
 
-{pause center}
+{#singly-notes}
+- Singly: `Box` + `Option` + ownership works well.
+- Neat stack.
+
+{pause center speaker-note=singly-notes}
 > ![Singly](list.dot.svg)
 > 
 > {pause}
-> Everything works very nicely: `Box`, `Option` and ownership rules make it possible
-> to write a neat stack.
-> 
-> {pause}
-> But what if we wanted to use our linked list as…
+> What if we wanted…
 
 {#queue-notes}
 - 1st: references and lifetimes.
 - 2nd: `Rc` and `Refcell`.
 - 3rd: `unsafe`.
-- I don't want to give up pointers.
-- Or deductive verification.
 
 {pause #queue}
 > ### …a queue?
@@ -351,7 +349,11 @@ A \land B \land \text{"the footprints of $A$ and $B$ are disjoint"}
 > {pause center=queue speaker-note=queue-notes}
 > ![Singly](queue.dot.svg){style="display: block; margin: auto;"}
 
-{pause}
+{#goal-notes}
+- I don't want to give up pointers.
+- Or deductive verification.
+
+{pause speaker-note=goal-notes}
 The goal: **implement this queue with full deductive verification**.
 
 {#mainstream}

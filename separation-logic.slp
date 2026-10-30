@@ -3,16 +3,13 @@
 {#part1}
 - Hoare logic refresher.
 - Why we might want to extend it.
+- Verify imperative program correctness
 
 {pause speaker-note=part1}
 ## Hoare logic + pointers
 
-{pause}
-[Hoare logic](https://en.wikipedia.org/wiki/Hoare_logic) makes it possible to verify
-the correctness of imperative programs.
-
 {pause up}
-### A Hoare logic example
+### An example
 
 {carousel change-page=~n:all}
 > ```ada
@@ -84,7 +81,7 @@ the correctness of imperative programs.
 - Xor cancels.
 
 {pause up speaker-note=party}
-### Another Hoare logic example
+### Another example
 
 {carousel change-page=~n:all}
 > ```ada

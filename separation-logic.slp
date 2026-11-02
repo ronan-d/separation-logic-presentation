@@ -426,7 +426,7 @@ Verifications are Rocq developments using a specialized library.
 {#queuerep-notes}
 - Would it work say stack + $last \mapsto ...$?
 
-{pause}
+{pause speaker-note=queuerep-notes}
 ```c
 struct cell {
   int element;

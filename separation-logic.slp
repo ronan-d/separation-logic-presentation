@@ -341,6 +341,7 @@ Link: [here](https://rust-unofficial.github.io/too-many-lists/index.html).
 > What if we wanted…
 
 {#queue-notes}
+- Not very complex!
 - 1st: references and lifetimes.
 - 2nd: `Rc` and `Refcell`.
 - 3rd: `unsafe`.

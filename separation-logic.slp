@@ -423,6 +423,9 @@ Verifications are Rocq developments using a specialized library.
 {pause up}
 ### Real deal: queue
 
+{#queuerep-notes}
+- Would it work say stack + $last \mapsto ...$?
+
 {pause}
 ```c
 struct cell {

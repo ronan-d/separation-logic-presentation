@@ -500,7 +500,10 @@ Definition enqueue_spec : ident * funspec :=
     PROP ( ) RETURN () SEP (queue (l ++ [i]) q; mem_mgr gv).
 ```
 
-{pause up}
+{#gdb-session}
+- Bit like a recorded GDB session
+
+{pause up speaker-note=gdb-session}
 
 {scroll}
 ```coq

@@ -325,6 +325,8 @@ A \land B \land \text{"the footprints of $A$ and $B$ are disjoint"}
 {pause speaker-note=slow-paced}
 ![Too many lists](Too-many-lists.png){style="display: block; margin: auto;"}
 
+Link: [here](https://rust-unofficial.github.io/too-many-lists/index.html).
+
 {pause}
 ### First part: singly linked list
 
